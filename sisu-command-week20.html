@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sisu Command · Week 20</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Georgia',serif;background:#E5E4E2;color:#333333;min-height:100vh;}
+button{cursor:pointer;font-family:'Georgia',serif;}
+input,textarea,select{font-family:'Georgia',serif;}
+
+.header{background:linear-gradient(135deg,#191970 0%,#3030AF 100%);border-bottom:3px solid #2BBF6C;padding:24px 36px 0;}
+.header-inner{max-width:1200px;margin:0 auto;}
+.header-top{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:12px;margin-bottom:20px;}
+.header-brand{font-size:9px;letter-spacing:.35em;color:#2BBF6C;text-transform:uppercase;font-family:monospace;margin-bottom:5px;}
+.header-title{font-size:30px;color:#fff;letter-spacing:-.01em;line-height:1;}
+.header-sub{font-size:11px;color:rgba(255,255,255,.35);margin-top:4px;font-family:monospace;}
+.header-right{display:flex;flex-direction:column;align-items:flex-end;gap:8px;}
+.week-num{font-size:22px;color:#2BBF6C;font-family:monospace;font-weight:700;line-height:1;text-align:right;}
+.week-range{font-size:10px;color:rgba(255,255,255,.4);font-family:monospace;margin-top:3px;}
+.header-actions{display:flex;gap:8px;align-items:center;}
+.btn-archive{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;padding:6px 14px;font-size:10px;font-family:monospace;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;transition:all .2s;}
+.btn-archive:hover{background:rgba(255,255,255,.2);}
+.btn-archive.saved{background:#2E8B57;border-color:#2E8B57;}
+.edit-toggle{background:rgba(43,191,108,.15);border:1px solid rgba(43,191,108,.4);color:#2BBF6C;padding:6px 14px;font-size:10px;font-family:monospace;letter-spacing:.1em;text-transform:uppercase;border-radius:3px;transition:all .2s;}
+.edit-toggle.on{background:#2BBF6C;color:#191970;border-color:#2BBF6C;font-weight:700;}
+.done-count{font-size:10px;color:#2BBF6C;font-family:monospace;}
+
+.tabs{display:flex;overflow-x:auto;gap:2px;}
+.tab-btn{background:transparent;border:none;color:rgba(255,255,255,.45);padding:9px 15px;font-size:12px;font-family:'Georgia',serif;white-space:nowrap;border-radius:0;transition:all .15s;}
+.tab-btn.active{background:#2E8B57;color:#fff;border-radius:4px 4px 0 0;font-weight:700;}
+.tab-btn:hover:not(.active){color:rgba(255,255,255,.75);}
+
+.body{max-width:1200px;margin:0 auto;padding:26px 36px;}
+
+.slabel{font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#2BBF6C;font-family:monospace;font-weight:700;margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid rgba(43,191,108,.27);}
+.slabel.gray{color:#777672;border-bottom-color:rgba(119,118,114,.27);}
+.slabel.purple{color:#8b5cf6;border-bottom-color:rgba(139,92,246,.27);}
+
+.card{background:#fff;border:1px solid #C8C7C4;border-radius:4px;padding:18px 20px;box-shadow:0 1px 3px rgba(25,25,112,.06);}
+.card.highlight{border-color:#2E8B57;box-shadow:0 2px 8px rgba(46,139,87,.13);}
+
+.pill{display:inline-block;font-size:9px;letter-spacing:.1em;text-transform:uppercase;font-family:monospace;padding:3px 9px;border-radius:2px;white-space:nowrap;font-weight:700;}
+.pill-CRITICAL{background:#3030AF;color:#fff;}
+.pill-HIGH{background:#2E8B57;color:#fff;}
+.pill-MEDIUM{background:#2BBF6C;color:#191970;}
+.pill-ACTIVE{background:#2E8B57;color:#fff;}
+.pill-BUILDING{background:#3030AF;color:#fff;}
+.pill-PLANNED{background:#C8C7C4;color:#333;}
+.pill-DONE{background:#191970;color:#fff;}
+.pill-NOW{background:#2BBF6C;color:#191970;}
+.pill-PRIMARY{background:#2E8B57;color:#fff;}
+.pill-SCREEN{background:#C8C7C4;color:#333;}
+.pill-WATCH{background:#C8841A;color:#fff;}
+.pill-COMPLETE{background:#888;color:#fff;}
+.pill-INPROG{background:#3030AF;color:#fff;}
+.pill-PUBLIC{background:#5a3e8a;color:#fff;}
+.pill-CLOSED{background:#555;color:#fff;}
+
+.stat-box{background:#ECEAE8;border:1px solid #C8C7C4;border-radius:4px;padding:14px 16px;}
+.stat-label{font-size:9px;color:#777672;letter-spacing:.2em;text-transform:uppercase;font-family:monospace;margin-bottom:5px;}
+.stat-value{font-size:20px;font-family:monospace;font-weight:700;line-height:1;}
+.stat-sub{font-size:11px;color:#777672;font-family:'Georgia',serif;margin-top:4px;}
+
+.edit-btn{background:rgba(48,48,175,.08);border:1px solid rgba(48,48,175,.2);color:#3030AF;padding:3px 10px;font-size:10px;border-radius:2px;font-family:monospace;letter-spacing:.05em;}
+.edit-btn:hover{background:rgba(48,48,175,.15);}
+.del-btn{background:rgba(176,48,48,.08);border:1px solid rgba(176,48,48,.2);color:#B03030;padding:3px 8px;font-size:10px;border-radius:2px;font-family:monospace;}
+.del-btn:hover{background:rgba(176,48,48,.15);}
+.save-btn{background:#2E8B57;border:1px solid #2E8B57;color:#fff;padding:4px 12px;font-size:10px;border-radius:2px;font-family:monospace;letter-spacing:.05em;}
+.add-btn{background:#191970;border:1px solid #191970;color:#fff;padding:6px 14px;font-size:10px;border-radius:3px;font-family:monospace;letter-spacing:.08em;text-transform:uppercase;}
+.add-btn:hover{background:#2a2a8f;}
+.cancel-btn{background:transparent;border:1px solid #C8C7C4;color:#777672;padding:4px 12px;font-size:10px;border-radius:2px;font-family:monospace;}
+
+.form-box{background:#ECEAE8;border:1px solid #C8C7C4;border-radius:4px;padding:16px 18px;margin-top:12px;}
+.form-row{display:grid;gap:10px;margin-bottom:10px;}
+.form-row.cols2{grid-template-columns:1fr 1fr;}
+.form-row.cols3{grid-template-columns:1fr 1fr 1fr;}
+.form-label{font-size:9px;color:#777672;letter-spacing:.15em;text-transform:uppercase;font-family:monospace;margin-bottom:4px;}
+.form-input{width:100%;padding:7px 10px;border:1px solid #C8C7C4;border-radius:3px;font-size:13px;font-family:'Georgia',serif;background:#fff;color:#333;}
+.form-input:focus{outline:none;border-color:#3030AF;}
+.form-select{width:100%;padding:7px 10px;border:1px solid #C8C7C4;border-radius:3px;font-size:12px;font-family:monospace;background:#fff;color:#333;}
+.form-textarea{width:100%;padding:7px 10px;border:1px solid #C8C7C4;border-radius:3px;font-size:13px;font-family:'Georgia',serif;background:#fff;color:#333;resize:vertical;min-height:60px;}
+
+.editable-text{cursor:pointer;border-bottom:1px dashed transparent;transition:border-color .15s;}
+.editable-text:hover{border-bottom-color:#3030AF;}
+.inline-edit{width:100%;padding:4px 6px;border:1px solid #3030AF;border-radius:2px;font-size:inherit;font-family:inherit;color:inherit;background:#fff;}
+
+.footer{background:#191970;border-top:3px solid #2BBF6C;padding:16px 36px;margin-top:40px;}
+.footer-inner{max-width:1200px;margin:0 auto;}
+.footer-label{font-size:9px;color:#2BBF6C;letter-spacing:.25em;text-transform:uppercase;font-family:monospace;margin-bottom:8px;}
+.footer-rules{display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px;}
+.footer-rule{display:flex;align-items:center;gap:7px;font-size:11px;color:rgba(255,255,255,.5);font-family:'Georgia',serif;}
+.footer-dot{width:5px;height:5px;border-radius:50%;background:#2BBF6C;flex-shrink:0;}
+.footer-stamp{font-size:9px;color:rgba(255,255,255,.18);letter-spacing:.2em;font-family:monospace;}
+
+.hidden{display:none;}
+.flex-between{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;}
+.flex-center{display:flex;align-items:center;gap:8px;}
+.mt8{margin-top:8px;}
+.mt12{margin-top:12px;}
+.mt16{margin-top:16px;}
+.mt20{margin-top:20px;}
+.mt24{margin-top:24px;}
+.mb8{margin-bottom:8px;}
+.mb12{margin-bottom:12px;}
+.mb16{margin-bottom:16px;}
+.mb20{margin-bottom:20px;}
+.mb24{margin-bottom:24px;}
+.gap8{gap:8px;}
+.col{display:flex;flex-direction:column;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+.grid-auto{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;}
+
+table{width:100%;border-collapse:collapse;}
+th{padding:9px 14px;text-align:left;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:#777672;font-weight:700;font-family:monospace;background:#ECEAE8;}
+td{padding:11px 14px;border-top:1px solid #C8C7C4;}
+tr:nth-child(even) td{background:#ECEAE8;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-inner">
+    <div class="header-top">
+      <div>
+        <div class="header-brand">Sisu Investment Holdings · Confidential</div>
+        <div class="header-title">Sisu Command</div>
+        <div class="header-sub">David Lewis only</div>
+      </div>
+      <div class="header-right">
+        <div>
+          <div class="week-num">Week 20</div>
+          <div class="week-range">May 11 – May 17, 2026</div>
+        </div>
+        <div class="header-actions">
+          <span class="done-count" id="done-count"></span>
+          <button class="edit-toggle" id="edit-toggle" onclick="toggleEdit()">Edit Mode</button>
+          <button class="btn-archive" id="archive-btn" onclick="archiveWeek()">Archive Week 20</button>
+        </div>
+      </div>
+    </div>
+    <div class="tabs">
+      <button class="tab-btn active" onclick="switchTab('week',this)">This Week</button>
+      <button class="tab-btn" onclick="switchTab('actions',this)">Action Items</button>
+      <button class="tab-btn" onclick="switchTab('deals',this)">Deal Pipeline</button>
+      <button class="tab-btn" onclick="switchTab('banking',this)">Banking &amp; Credit</button>
+      <button class="tab-btn" onclick="switchTab('portfolio',this)">Portfolio</button>
+      <button class="tab-btn" onclick="switchTab('capital',this)">Capital Structure</button>
+      <button class="tab-btn" onclick="switchTab('advisory',this)">Advisory Board</button>
+      <button class="tab-btn" onclick="switchTab('vision',this)">Platform Vision</button>
+    </div>
+  </div>
+</div>
+
+<div class="body">
+
+<!-- THIS WEEK -->
+<div id="tab-week">
+  <div class="slabel mb16">Week 20 · May 11 – May 17, 2026 · Intelligence Layer</div>
+  <div id="week-items" class="col" style="gap:8px;"></div>
+  <div id="week-add-form" class="form-box hidden mt16">
+    <div class="slabel gray">Add weekly priority</div>
+    <div class="form-row cols3">
+      <div><div class="form-label">Title</div><input class="form-input" id="wi-title" placeholder="Priority title"></div>
+      <div><div class="form-label">Context</div><input class="form-input" id="wi-context" placeholder="e.g. Q2 2026 · Owner"></div>
+      <div><div class="form-label">Urgency</div><select class="form-select" id="wi-urgency"><option value="CRITICAL">Critical</option><option value="HIGH" selected>High</option><option value="MEDIUM">Medium</option></select></div>
+    </div>
+    <div class="form-row"><div><div class="form-label">Note / Detail</div><textarea class="form-textarea" id="wi-note" placeholder="Additional context..."></textarea></div></div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addWeekItem()">Add Item</button><button class="cancel-btn mt0 ml8" style="margin-left:8px;" onclick="toggleForm('week-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mt12"><button class="add-btn" onclick="toggleForm('week-add-form')">+ Add Priority</button></div>
+</div>
+
+<!-- ACTION ITEMS -->
+<div id="tab-actions" class="hidden">
+  <div class="slabel mb16">Confidential Action Items · David Only</div>
+  <div id="action-items" class="col" style="gap:8px;"></div>
+  <div id="action-add-form" class="form-box hidden mt16">
+    <div class="slabel gray">Add action item</div>
+    <div class="form-row cols3">
+      <div><div class="form-label">Title</div><input class="form-input" id="ai-title" placeholder="Action item title"></div>
+      <div><div class="form-label">Owner</div><input class="form-input" id="ai-owner" placeholder="e.g. David"></div>
+      <div><div class="form-label">Due</div><input class="form-input" id="ai-due" placeholder="e.g. Q2 2026"></div>
+    </div>
+    <div class="form-row cols2">
+      <div><div class="form-label">Urgency</div><select class="form-select" id="ai-urgency"><option value="CRITICAL">Critical</option><option value="HIGH" selected>High</option><option value="MEDIUM">Medium</option></select></div>
+      <div><div class="form-label">Detail</div><input class="form-input" id="ai-detail" placeholder="Additional detail..."></div>
+    </div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addActionItem()">Add Item</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('action-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mt12"><button class="add-btn" onclick="toggleForm('action-add-form')">+ Add Action Item</button></div>
+</div>
+
+<!-- DEAL PIPELINE -->
+<div id="tab-deals" class="hidden">
+  <div class="slabel mb16">Primary · Venus Acquisition Holdings</div>
+  <div id="primary-deal" class="mb24"></div>
+  <div class="slabel mb16">Secondary · All require Fast Kill Test before any advancement</div>
+  <div class="card mb24" style="padding:0;">
+    <table><thead><tr><th>Company</th><th>Gate Status</th><th>Note</th><th class="edit-only hidden">Actions</th></tr></thead>
+    <tbody id="secondary-deals"></tbody></table>
+  </div>
+  <div id="secondary-add-form" class="form-box hidden mb16">
+    <div class="slabel gray">Add secondary deal</div>
+    <div class="form-row cols3">
+      <div><div class="form-label">Company Name</div><input class="form-input" id="sd-name" placeholder="Company name"></div>
+      <div><div class="form-label">Gate Status</div><select class="form-select" id="sd-gate"><option value="SCREEN">Screening</option><option value="INPROG">In Progress</option><option value="PLANNED">Planned</option></select></div>
+      <div><div class="form-label">Note</div><input class="form-input" id="sd-note" placeholder="Optional note"></div>
+    </div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addSecondaryDeal()">Add Deal</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('secondary-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mb24"><button class="add-btn" onclick="toggleForm('secondary-add-form')">+ Add Secondary Deal</button></div>
+
+  <!-- AXIAL DEAL FLOW -->
+  <div class="slabel mb16" style="color:#C8841A;border-bottom-color:rgba(200,132,26,.27);">Axial Deal Flow · Week 20 Snapshot</div>
+  <div class="grid-auto mb16">
+    <div class="stat-box" style="border-left:4px solid #2E8B57;">
+      <div class="stat-label">Advanced to Salesforce</div>
+      <div class="stat-value" style="color:#2E8B57;">7</div>
+      <div class="stat-sub">This week</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid #3030AF;">
+      <div class="stat-label">Active Deals</div>
+      <div class="stat-value" style="color:#3030AF;">70</div>
+      <div class="stat-sub">Awaiting CIM / NDA / review</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid #C8841A;">
+      <div class="stat-label">Curated Deals</div>
+      <div class="stat-value" style="color:#C8841A;">39</div>
+      <div class="stat-sub">To be analyzed this week</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid #777672;">
+      <div class="stat-label">Beyond-Filter Opportunities</div>
+      <div class="stat-value" style="color:#777672;">6</div>
+      <div class="stat-sub">Axial recommendations</div>
+    </div>
+  </div>
+  <div class="card mb24" style="padding:0;overflow:auto;">
+    <table>
+      <thead><tr><th>Project</th><th>Platform · Gist</th></tr></thead>
+      <tbody>
+        <tr><td style="font-weight:700;color:#191970;">Project Dirtwork</td><td style="font-size:12px;color:#333;">South DFW excavation platform (J&amp;K Excavation / J&amp;K Trucking, Waxahachie TX). $21.3M TTM revenue · $3.0M TTM adj. EBITDA · $40M+ backlog · 65 W2.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project Forty-One</td><td style="font-size:12px;color:#333;">Pacific NW electrical services (Boone Electric, Puyallup WA — three brands: Boone, Linx, SURECOM). $29.7M 2025 revenue · $2.8M adj. EBITDA · ~165 employees · 90% repeat revenue.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project HeliSpray</td><td style="font-size:12px;color:#333;">Midwest aerial crop protection (The Helicopter Team, Central IL + Orlando FL). 17 helicopters · 650K+ acres/year · $8.8M 2025 revenue · $3.1M adj. EBITDA · 92.9% recurring.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project Molar</td><td style="font-size:12px;color:#333;">Dental IT MSP platform (DDS Tech + Dental Design Systems combined). National reach, CA/UT concentration. $7.39M TTM revenue · $2.21M TTM normalized EBITDA · 614 active dental clients.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project Precision</td><td style="font-size:12px;color:#333;">South FL commercial roofing (Precision Roofing Corp). 32 years operating · $19.9M 2025 revenue · $3.95M EBITDA · $10M+ backlog · ~32 W2.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project TSP</td><td style="font-size:12px;color:#333;">Michigan environmental remediation platform (TSP Environmental). Soil/groundwater remediation, abatement, wetland mitigation. $10.8M 2025 revenue · ~$2.0M adj. EBITDA.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project Rustic</td><td style="font-size:12px;color:#333;">Premium reclaimed lumber platform (Montana Reclaimed Lumber Co.). High-end residential/commercial, Gallatin / Big Sky / Yellowstone Club markets. $18.8M TTM revenue · $3.9M TTM EBITDA.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="slabel purple mb16">Public Markets · Farm Team</div>
+  <div id="public-markets-section"></div>
+</div>
+
+<!-- BANKING -->
+<div id="tab-banking" class="hidden">
+  <div class="slabel mb16">Banking &amp; Credit · Active Relationships</div>
+  <div id="banking-list" class="col" style="gap:12px;margin-bottom:20px;"></div>
+  <div id="banking-add-form" class="form-box hidden mb16">
+    <div class="slabel gray">Add banking relationship</div>
+    <div class="form-row cols2">
+      <div><div class="form-label">Bank Name</div><input class="form-input" id="bk-name" placeholder="e.g. Chase Bank"></div>
+      <div><div class="form-label">Contact</div><input class="form-input" id="bk-contact" placeholder="e.g. Jane Smith, VP"></div>
+    </div>
+    <div class="form-row cols2">
+      <div><div class="form-label">Type</div><input class="form-input" id="bk-type" placeholder="e.g. New Relationship"></div>
+      <div><div class="form-label">Urgency</div><select class="form-select" id="bk-urgency"><option value="High">High</option><option value="Medium" selected>Medium</option><option value="Low">Low</option></select></div>
+    </div>
+    <div class="form-row"><div><div class="form-label">Notes</div><textarea class="form-textarea" id="bk-notes" placeholder="Relationship context..."></textarea></div></div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addBanking()">Add Relationship</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('banking-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mb20"><button class="add-btn" onclick="toggleForm('banking-add-form')">+ Add Relationship</button></div>
+  <div style="padding:14px 18px;background:#191970;border-radius:4px;">
+    <div class="slabel" style="color:#2BBF6C;border-color:rgba(43,191,108,.27);margin-bottom:8px;">Sequencing Rule</div>
+    <div style="font-size:13px;color:#fff;line-height:1.6;" id="sequencing-rule">Wintrust $2.9M financing package in active diligence — term sheet expected next week post Carlos review with Scott team. PNC LOC increase push follows Wintrust term sheet (leverage). BMO parallel conversation. All three relationships compounding, none replacing.</div>
+    <div class="edit-only hidden mt8"><button class="edit-btn" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff;" onclick="editSequencingRule()">Edit Rule</button></div>
+  </div>
+</div>
+
+<!-- PORTFOLIO -->
+<div id="tab-portfolio" class="hidden">
+  <div style="margin-bottom:20px;">
+    <div class="flex-between mb16" style="flex-wrap:wrap;">
+      <div>
+        <div style="font-size:9px;color:#2BBF6C;letter-spacing:.3em;text-transform:uppercase;font-family:monospace;margin-bottom:4px;">Portfolio Company · Anchor</div>
+        <div style="font-size:22px;color:#191970;font-weight:700;margin-bottom:2px;">Venus Brands</div>
+        <div style="font-size:12px;color:#777672;">Est. 1932 · Hingham, MA · Artisan cracker and flatbread manufacturer</div>
+      </div>
+      <span class="pill pill-ACTIVE">Active</span>
+    </div>
+    <div id="portfolio-stats" class="grid-auto mb16"></div>
+    <div style="padding:12px 16px;background:#ECEAE8;border:1px solid #C8C7C4;border-radius:4px;margin-bottom:4px;">
+      <div id="portfolio-context" style="font-size:12px;color:#333;line-height:1.6;">Venus runs at capacity 24/5 from May/June through November. Q1 is the structural seasonal trough. Crackers down YTD but peak season order book points to finishing ahead. Poor absorption in trough months is the largest operating drag.</div>
+      <div class="edit-only hidden mt8"><button class="edit-btn" onclick="editPortfolioContext()">Edit Context</button></div>
+    </div>
+  </div>
+  <div class="slabel mb16">OGSM Scorecard · 2026</div>
+  <div id="ogsm-grid" class="grid2 mb24"></div>
+  <div class="slabel mb16">Brand Architecture</div>
+  <div id="brands-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;margin-bottom:24px;"></div>
+  <div id="brand-add-form" class="form-box hidden mb16">
+    <div class="slabel gray">Add brand</div>
+    <div class="form-row cols2">
+      <div><div class="form-label">Brand Name</div><input class="form-input" id="br-name" placeholder="Brand name"></div>
+      <div><div class="form-label">Description</div><input class="form-input" id="br-desc" placeholder="Brief description"></div>
+    </div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addBrand()">Add Brand</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('brand-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mb24"><button class="add-btn" onclick="toggleForm('brand-add-form')">+ Add Brand</button></div>
+  <div class="slabel mb16">Venus 2026 Roadmap · Q2–Q4</div>
+  <div class="card" style="padding:0;overflow:auto;">
+    <table><thead><tr><th>Workstream</th><th>Q2</th><th>Q3</th><th>Q4</th></tr></thead>
+    <tbody>
+      <tr><td style="font-weight:700;color:#191970;">Restructure</td><td>Kit Shah separation closes. Governance cleanup.</td><td>Clean foundation holds.</td><td>—</td></tr>
+      <tr><td style="font-weight:700;color:#191970;">People</td><td>COO / Plant Manager search continues.</td><td>Hire lands. Onboarding and operational handoffs.</td><td>Full ownership of plant cadence and reliability KPIs.</td></tr>
+      <tr><td style="font-weight:700;color:#191970;">Process (AI)</td><td>AI tooling scoped for reporting, forecasting, and process automation.</td><td>First AI-enabled workflows in production.</td><td>Full process-ownership layer with AI across the stack.</td></tr>
+      <tr><td style="font-weight:700;color:#191970;">Portfolio</td><td>Identify strategic bolt-on targets under Venus Brands umbrella.</td><td>Diligence on lead target. IC memo and capital decision.</td><td>—</td></tr>
+    </tbody></table>
+  </div>
+</div>
+
+<!-- CAPITAL STRUCTURE -->
+<div id="tab-capital" class="hidden">
+  <div class="slabel mb16">Capital Structure · Four Layers</div>
+  <div id="capital-layers" class="col" style="gap:10px;"></div>
+</div>
+
+<!-- ADVISORY BOARD -->
+<div id="tab-advisory" class="hidden">
+  <div class="slabel mb16">Advisory Board · Sisu Investment Holdings</div>
+  <div id="advisory-members" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px;"></div>
+  <div id="advisory-add-form" class="form-box hidden mb16">
+    <div class="slabel gray">Add advisory board member</div>
+    <div class="form-row cols2">
+      <div><div class="form-label">Full Name</div><input class="form-input" id="adv-name" placeholder="Full name"></div>
+      <div><div class="form-label">Role / Title</div><input class="form-input" id="adv-role" placeholder="e.g. Managing Director, Acme Capital"></div>
+    </div>
+    <div class="form-row"><div><div class="form-label">Value Contribution</div><textarea class="form-textarea" id="adv-value" placeholder="What they bring to the board..."></textarea></div></div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addAdvisory()">Add Member</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('advisory-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mb16"><button class="add-btn" onclick="toggleForm('advisory-add-form')">+ Add Member</button></div>
+  <div class="slabel mb16 mt8">Advisory Board Actions · Q2 2026</div>
+  <div id="advisory-actions" class="col" style="gap:6px;margin-bottom:24px;"></div>
+  <div id="advisory-action-add-form" class="form-box hidden mb16">
+    <div class="slabel gray">Add advisory action item</div>
+    <div class="form-row cols3">
+      <div><div class="form-label">Item</div><input class="form-input" id="aa-item" placeholder="Action item"></div>
+      <div><div class="form-label">Owner</div><input class="form-input" id="aa-owner" placeholder="e.g. David / Aubrey"></div>
+      <div><div class="form-label">Due</div><input class="form-input" id="aa-due" placeholder="e.g. Q3 2026"></div>
+    </div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addAdvisoryAction()">Add Item</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('advisory-action-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mb16"><button class="add-btn" onclick="toggleForm('advisory-action-add-form')">+ Add Action Item</button></div>
+</div>
+
+<!-- VISION -->
+<div id="tab-vision" class="hidden">
+  <div class="slabel mb16">Platform Map · Six Platforms</div>
+  <div id="platforms-list" class="col" style="gap:8px;margin-bottom:28px;"></div>
+  <div id="platform-add-form" class="form-box hidden mb16">
+    <div class="slabel gray">Add platform</div>
+    <div class="form-row cols3">
+      <div><div class="form-label">Platform Name</div><input class="form-input" id="pl-name" placeholder="Platform name"></div>
+      <div><div class="form-label">Phase / Timeline</div><input class="form-input" id="pl-phase" placeholder="e.g. 2027-2028"></div>
+      <div><div class="form-label">Status</div><select class="form-select" id="pl-status"><option value="ACTIVE">Active</option><option value="BUILDING">Building</option><option value="PLANNED" selected>Planned</option></select></div>
+    </div>
+    <div class="form-row"><div><div class="form-label">Companies</div><input class="form-input" id="pl-companies" placeholder="e.g. Company A · Company B"></div></div>
+    <div class="flex-center mt8"><button class="save-btn" onclick="addPlatform()">Add Platform</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('platform-add-form')">Cancel</button></div>
+  </div>
+  <div class="edit-only hidden mb24"><button class="add-btn" onclick="toggleForm('platform-add-form')">+ Add Platform</button></div>
+  <div class="slabel mb16">Strategic Timeline</div>
+  <div id="timeline" class="col"></div>
+</div>
+
+</div><!-- end body -->
+
+<div class="footer">
+  <div class="footer-inner">
+    <div class="footer-label">Deal Discipline · Non-Negotiable</div>
+    <div class="footer-rules">
+      <div class="footer-rule"><div class="footer-dot"></div>No deal advances without Fast Kill Test.</div>
+      <div class="footer-rule"><div class="footer-dot"></div>No capital without full Delphi evaluation.</div>
+      <div class="footer-rule"><div class="footer-dot"></div>No external narrative without 1-page IC memo.</div>
+      <div class="footer-rule"><div class="footer-dot"></div>Passing is success when discipline holds.</div>
+    </div>
+    <div class="footer-stamp">SISU INVESTMENT HOLDINGS · WEEK 20 · MAY 11, 2026 · CONFIDENTIAL — DAVID LEWIS ONLY</div>
+  </div>
+</div>
+
+<script>
+const S = {
+  get:(k)=>{try{return JSON.parse(localStorage.getItem('sc-'+k));}catch{return null;}},
+  set:(k,v)=>{try{localStorage.setItem('sc-'+k,JSON.stringify(v));}catch{}}
+};
+
+let editMode = false;
+let openItems = {};
+
+const INIT = {
+  weekItems: [
+    {id:'tw1',urgency:'CRITICAL',dot:'#3030AF',title:'Wintrust $2.9M financing package · Awaiting term sheet',context:'Active · Carlos Cardenas',note:'Scott + team updating internal analysis from May 15 call. Reviewing with Carlos on Monday upon return. Reverting with timeline, structure, and credit feedback next week. Package: $2M term loan refinance + $270K Kit Shah buyout + $2M new LOC. David to send hard numbers substantiating $6M Aldi incremental, QofE report, and remaining historical financials.'},
+    {id:'tw2',urgency:'CRITICAL',dot:'#3030AF',title:'Kit Shah minority separation',context:'~45 days to close · Late June target',note:'Buyout cost ~$270K rolled into new term loan. Removes him as guarantor on banking relationship. Closing within ~45 days. No external narrative without 1-page IC memo. Coordinate with Greg Kilpatrick.'},
+    {id:'tw3',urgency:'CRITICAL',dot:'#3030AF',title:'Q1 cash flow gap · 4-week low-income window',context:'Liquidity watch · LOC $650K drawn / $350K available',note:'$500K expected end of next week (30-45 days out). 4-week period of limited income due to weak prior-3-week sales ($93K, $113K). Next interest payment June 5. David engaging PNC for LOC bump after Wintrust term sheet lands. Goal: secure increase before June 30 line renewal.'},
+    {id:'tw4',urgency:'HIGH',dot:'#2E8B57',title:'Stone Ground Crackers lawsuit · Motion to dismiss',context:'Response due June 10 · McGuire Woods',note:'Spencer Sheehan plaintiff. NY GBL §§ 349 & 350. Motion to dismiss leveraging Randolph (SDNY). Counsel sending joint rep letter (Venus + Albertsons), document collection memo, and draft motion. Need NY-specific sales data and milling process detail to substantiate "stone ground" labeling.'},
+    {id:'tw5',urgency:'HIGH',dot:'#2E8B57',title:'Harry & David production launch',context:'First week of June · $1.82M total volume',note:'Parts air-freighted next week. Corrugate in May 26. Mock-up samples week of 5/26 to set up line and collect efficiency data. 13-14 total truckloads (Aldi + H&D) driving ramp. July will be peak — staffing the constraint.'},
+    {id:'tw6',urgency:'HIGH',dot:'#2E8B57',title:'Azus Standard e-commerce opportunity',context:'New · Saltines / Thin Wheats / Classic Golden',note:'C-free oils requirement. Azus supplying all ingredients (flour, avocado oil, palm oil). Avocado oil = full sanitation between runs (significant cost). ~6 pallets per item × 3 items = ~18hrs production. Charge them for samples. Long-term ongoing if Phase 1 hits.'},
+    {id:'tw7',urgency:'HIGH',dot:'#2E8B57',title:'Seasoning equipment bottleneck · 20-week lead time',context:'Blocks snack cracker + puff scale',note:'Tumbler quote: 20 weeks. Slurry system: $170-200K (superior for cheese coatings). Without it, snack crackers + puffs cannot launch on schedule. David pursuing vendor lead-time reduction, financing, and Foodservice benchmarking.'},
+    {id:'tw8',urgency:'HIGH',dot:'#2E8B57',title:'Claude umbrella · AI governance rollout',context:'Approve next week · Then leadership team',note:'Lander delivering revised "Claude umbrella" master prompt before next weekly meeting. Two products: CSU AI Principles + Prompting Instructions. Plan: approve at next meeting, present to leadership team after. Leaders to initial principles and confirm receipt via email.'},
+    {id:'tw9',urgency:'HIGH',dot:'#2E8B57',title:'Travel bookings · Book on May 18',context:'NY Capital Alliance / Vail / Boston ×3',note:'NY Capital Alliance: arrive Sunday midday, depart Wed ~4pm. Vail: confirm group discount expiration, then book lodging + flight. Boston July: 14-15, 20-22 (arrive evening 20th, depart evening 22nd), 28-29 — all confirmed by Kendra for Ben.'},
+    {id:'tw10',urgency:'HIGH',dot:'#2E8B57',title:'Conrad Athens billing discrepancy',context:'Active · ~€600 gap',note:'Charged €2,336 vs. expected €1,752-1,776 with 25% YPO group discount. Group discount appears not applied. Aubrey reaching out via email to reconcile.'},
+    {id:'tw11',urgency:'MEDIUM',dot:'#2BBF6C',title:'Greece / Africa multi-leg itinerary',context:'Aug 28 – Sept 2 retreat · Book flights June',note:'Plan: Chicago → Greece → Africa → Chicago. Retreat dates Aug 28-Sept 2 (Visit Roger Gracie). Need Africa registration requirements + pricing before booking multi-leg. Lodging Greece paid. Cyprus small contingency if Africa falls through.'},
+    {id:'tw12',urgency:'MEDIUM',dot:'#2BBF6C',title:'Family insurance underwriting · Project Help My Family',context:'6-8 weeks · Carl Bailey',note:'Mom + stepmom: $100K death benefit each, $4K total annual premium budget. Carl confirming Indiana licensing or referral. Intake forms to family members (Rhonda, Annette, Vincent — brother as temp). Consolidate all premiums into quarterly Ameriprise pull.'},
+    {id:'tw13',urgency:'MEDIUM',dot:'#2BBF6C',title:'DAF funding execution · Fidelity transfer',context:'$10K minimum + $15K cash to hit $25K annual',note:'Transfer form signed and back to Carl. Funding from Ameriprise: OTC Fidelity + Apple + Berkshire + tax-exempt MMF. Future contributions: appreciated stock preferred over cash. $1K minimum subsequent, $100 minimum grant.'},
+    {id:'tw14',urgency:'MEDIUM',dot:'#2BBF6C',title:'Production scheduling redesign · 13-week horizon',context:'Matt + Nick · Excel master model',note:'Splitting baking vs. packaging. Materials tracking layered in (baking 4-5 days, packaging 6 weeks). Goal: control costs + shrink sale-to-cash window. Validate against Nick\'s current process. Claude code to explore for sustainability.'},
+    {id:'tw15',urgency:'MEDIUM',dot:'#2BBF6C',title:'Bourbon maple BBQ · Base flavor decision',context:'NPD · Foodsource',note:'Bourbon maple emerged as top base barbecue across Kevin, Brandon, and David. Cocoa agave good but not the base. Strategy: anchor line with one strong base, rotate LTOs to explore (test in DTC variety packs). Brief on barbecue going to Foodsource for first dev round.'},
+    {id:'tw16',urgency:'MEDIUM',dot:'#2BBF6C',title:'Rhonda property maintenance · Project Help My Family',context:'In motion',note:'Lawn service confirmed at $60/visit biweekly via TaskRabbit (Aubrey). Full-year contract being scoped including treatment program (True Green for treatments). Snow shoveling quote pending. German not responding on initial property assessment — David texted directly. Address clarification: 1309 W 47th is stepmom\'s, Rhonda\'s is different.'},
+    {id:'tw17',urgency:'MEDIUM',dot:'#2BBF6C',title:'Field Notes page · Website revision round',context:'Push depends on Ronald finishing South Shore',note:'Annual Letters header revised (plural). Ahmed event summary added to "Latest from Sisu." Nature/exploration imagery for menu photo (Ayman preparing 3 options). New vision-focused quote being drafted (replacing "home for businesses worth owning forever"). Ayman fee $200 — accepted.'},
+    {id:'tw18',urgency:'MEDIUM',dot:'#2BBF6C',title:'RMCF thesis development',context:'Public markets · Nasdaq: RMCF',note:'Disciplined position-building continues. Activist-aligned CEO (Jeffrey Geygan). Margin inflection via dynamic pricing. Cocoa cost tailwind normalizing.'},
+  ],
+  actionItems: [
+    {id:1,title:'Send Aldi $6M incremental hard numbers to Wintrust',due:'This week',urgency:'CRITICAL',owner:'David',detail:'For 2026+2027 combined incremental sales. Substantiates the financing package. Also send completed Quality of Earnings (QofE) report and confirm/forward any additional FY23/FY22 historicals from due diligence.'},
+    {id:2,title:'Kit Shah minority separation',due:'~45 days',urgency:'CRITICAL',owner:'David',detail:'$270K buyout rolled into new term loan. Removes him as guarantor. Closing within ~45 days of May 15.'},
+    {id:3,title:'Push PNC for LOC bump after Wintrust term sheet',due:'This week',urgency:'CRITICAL',owner:'David',detail:'Strategy: wait for Wintrust term sheet, then leverage with Jeff Martinez at PNC. Could push existing PNC LOC over to new term loan to reduce term amount. Goal: increase before June 30 renewal.'},
+    {id:4,title:'Stone Ground Crackers · Provide milling process detail + NY sales data',due:'Before June 10',urgency:'CRITICAL',owner:'David / Lee',detail:'NY-specific unit sales for Acme Markets. Milling process to substantiate "stone ground" labeling (distinguishes from Randolph). McGuire Woods sending joint rep letter + document checklist + draft motion to dismiss.'},
+    {id:5,title:'Pay Salesforce ~$2,200 via Amex',due:'Today (May 11)',urgency:'CRITICAL',owner:'Aubrey',detail:'Access suspended. Halting all Axial deal flow upload. Log receipt in Expensify.'},
+    {id:6,title:'Wire $5K to Capital Alliance',due:'May 11',urgency:'HIGH',owner:'David',detail:'First half of $10K. Still waiting on vendor response for split payment confirmation. Wire today regardless. Second $5K June.'},
+    {id:7,title:'Conrad Athens · Reconcile €600 billing discrepancy',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'25% YPO group discount appears not applied. €2,336 charged vs. €1,752-1,776 expected. Reach out via email; David forwarded original booking email.'},
+    {id:8,title:'Book NY Capital Alliance hotel + flights',due:'May 18',urgency:'HIGH',owner:'Aubrey',detail:'Arrive Sunday midday, depart Wed ~4pm (event recommends arrival by ~10am). Block calendar so Keisha knows travel dates. No United miles remaining — last balance used for Vail.'},
+    {id:9,title:'Book July Boston flights (×3 trips)',due:'May 18',urgency:'HIGH',owner:'Aubrey',detail:'July 14-15, July 20 evening – 22 evening, July 28-29. Kendra confirmed July 21 locked for Ben.'},
+    {id:10,title:'Book Vail lodging + flight',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Flight booked at $1,200. Confirm if Vail group discount has expiration — if no, book May 18; if yes, sooner. Use Chase card. Flight via United credits.'},
+    {id:11,title:'Pay Chicago Club $4,307.56',due:'May 25',urgency:'HIGH',owner:'Aubrey',detail:'United card. Confirm latest invoice first to avoid 60-day late status.'},
+    {id:12,title:'Pay CLA $3,799',due:'June 8',urgency:'HIGH',owner:'Aubrey',detail:'Email CLA to confirm payment date.'},
+    {id:13,title:'Validate "no-tumbler" baked-in sweet puff',due:'Next week',urgency:'HIGH',owner:'Nick',detail:'Run during tumbler wash/adjustment windows to preserve throughput. Possible candidate: sorghum flour + sugar/cinnamon (tested at home). Document run parameters and throughput impact.'},
+    {id:14,title:'Cost-down formulation proposal · Flour + oil',due:'Next week',urgency:'HIGH',owner:'Nick',detail:'Alternative flour composition + candidate oil types. Maintain crispness/quality. Kevin to meet with Nick tomorrow for oil pricing + viable alternatives.'},
+    {id:15,title:'Push seasoning vendor on lead-time reduction',due:'Next week',urgency:'HIGH',owner:'David',detail:'Tumbler 20-week quote = mid-October. Explore used equipment, slurry vs. powder. Coordinate with Foodservice (Kevin) to benchmark practices and slurry suitability for cheese coatings.'},
+    {id:16,title:'Claude umbrella · Master prompt + leadership rollout',due:'Approve next week',urgency:'HIGH',owner:'Lander · David',detail:'Lander delivering revised draft before next weekly meeting. Two products: CSU AI Principles + Prompting Instructions. Approve next meeting, present to leadership team after. Individual leaders to initial principles + email receipt.'},
+    {id:17,title:'Sign + return Ameriprise transfer form to Carl',due:'This week',urgency:'HIGH',owner:'David',detail:'OTC Fidelity, Apple, Berkshire, all shares tax-exempt MMF transfer to DAF (Fidelity / US Charitable Gift Trust). Both signatures required. Scan both pages back to Carl via secure portal.'},
+    {id:18,title:'Family insurance · Complete intake forms',due:'When received',urgency:'HIGH',owner:'David / Aubrey',detail:'Carl sending prep documents (CC Aubrey, CSU email). Mom + stepmom: $100K death benefit, $4K combined annual premium budget. Vincent: temp coverage until full-time employment. Carl checking IN insurance licensing.'},
+    {id:19,title:'Salesforce · Upload Gung Ho Corporation for research',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'New research target. Move 1035 to On Hold. Filter Notion board by Assigned to: David Lewis. Donut chart layout applied.'},
+    {id:20,title:'Manually generate weekly dashboard until Cloud Code live',due:'Sundays',urgency:'HIGH',owner:'Aubrey',detail:'David sharing Claude thread with meeting notes. Aubrey to update dashboard manually for now and deliver Sundays for Monday review. Weekly to-do request for materials sent Friday for Sunday turnaround.'},
+    {id:21,title:'Springs Food meeting · Capture protein cracker process changes',due:'May 12',urgency:'HIGH',owner:'Jim',detail:'Customer suggesting processing changes for high-protein cracker. Note refrigerated Puratos component handling requirement. Circulate summary.'},
+    {id:22,title:'Lavo Retail / Walmart · Mock packaging samples',due:'TBD',urgency:'MEDIUM',owner:'Jim · Nick',detail:'Snack cracker samples in mock packaging (white boxes + client logo sticker, not bagged). Walmart decision in 2027 — don\'t hold up Mariner timing. Volume opportunity if it lands.'},
+    {id:23,title:'Albertson\'s · Develop entertaining cracker samples for Nikki',due:'TBD',urgency:'MEDIUM',owner:'Jim · Nick',detail:'Garlic thyme, rosemary, butter-based (Ritz-like). Toppings at end of run.'},
+    {id:24,title:'Z Crackers cornmeal mini sample',due:'This week',urgency:'MEDIUM',owner:'Nick',detail:'~20% cornmeal formula adjustment. Cornmeal received Friday. Easy run on minis.'},
+    {id:25,title:'Source Arc\'teryx Atom Jackets for Advisory Board',due:'Q3 prep',urgency:'MEDIUM',owner:'Aubrey',detail:'Request jacket/vest sizes from all 8 board members. Source pricing — buy + embroider Sisu logo (back collar or alt placement). Open to one-stop vendor if available.'},
+    {id:26,title:'Set up GitHub + outsourced server for Claude Code',due:'TBD',urgency:'MEDIUM',owner:'David',detail:'Unblocks Aubrey to explore Cloud Code. Long-term: dashboard automation via agentic workflow.'},
+    {id:27,title:'Cancel Bridge / lawn service going to stepmom',due:'This week',urgency:'MEDIUM',owner:'Aubrey',detail:'Ensure scope redirects to Rhonda\'s correct address. Stepmom (1309 W 47th) already has someone cutting grass. Confirm Rhonda address (~2041 Gary, IN 46404).'},
+    {id:28,title:'Follow up with German on Rhonda\'s initial assessment',due:'This week',urgency:'MEDIUM',owner:'David · Aubrey',detail:'No response yet. Aubrey texted; David also texted directly.'},
+    {id:29,title:'Build seasonal NPD cadence + customer submission calendar',due:'Q2',urgency:'MEDIUM',owner:'Brandon',detail:'Stage gates, WIP targets (in test, flavors teed up). Some customers only allow 2 NPD windows/year — backward planning to ensure sample/spec readiness at gates.'},
+    {id:30,title:'NPD SOP · Ship unseasoned puffs; vendors do flavor trials',due:'Document this week',urgency:'MEDIUM',owner:'Brandon',detail:'Hard and fast: plant ships unseasoned puffs. Vendors experiment. Only request bulk seasoning (~20 lbs) when near-go on a winning flavor (e.g., Japanese barbecue). Communicate to Jill + all flavor partners.'},
+    {id:31,title:'Long-horizon data sources · 3-5 year market shift visibility',due:'TBD',urgency:'MEDIUM',owner:'Brandon',detail:'Current data (vendor ~1yr outlook, Nielsen real-time) is insufficient. Recommend data stack to track protein, fiber, non-seed-oil, GLP-1 shifts.'},
+    {id:32,title:'Soft-circle co-investor pool',due:'2026',urgency:'MEDIUM',owner:'David',detail:'Family office relationships through Field Notes, annual letter, and direct conversations.'},
+    {id:33,title:'Identify bolt-on targets under Venus',due:'Q2 2026',urgency:'MEDIUM',owner:'David',detail:'Strategic tuck-ins. Diligence on lead target Q3. IC memo and capital decision Q3.'},
+    {id:34,title:'NDAs — outstanding copies collected',due:'Ongoing',urgency:'MEDIUM',owner:'Aubrey',detail:'In progress. Collect all executed NDAs and confirm advisory data room access.'},
+  ],
+  secondaryDeals: [
+    {name:'Westminster Crackers',gate:'SCREEN',note:'Sample exchange completed. No distraction from Venus execution.'},
+    {name:"Nature's Intent",gate:'SCREEN',note:''},
+    {name:"Matt's Cookies",gate:'SCREEN',note:''},
+    {name:'Fantasy Baking',gate:'SCREEN',note:''},
+    {name:'Gung Ho Corporation',gate:'INPROG',note:'NEW · Research in progress. Aubrey compiling info + adding to Salesforce.'},
+    {name:'Deal 1035',gate:'PLANNED',note:'Moved to On Hold this week.'},
+  ],
+  banking: [
+    {name:'Wintrust',contact:'Carlos Cardenas, Group SVP',type:'$2.9M financing package · Active diligence',urgency:'High',urgencyColor:'#B03030',borderColor:'#2E8B57',notes:'May 15 call with Scott + team completed. Internal analysis being updated. Carlos back Monday; reverting next week with timeline, structure, and credit feedback. Package: $2M term refinance + $270K Kit Shah buyout + new $2M LOC. David offering to transfer existing PNC LOC over to reduce term amount. Outstanding requests: hard numbers on $6M Aldi incremental (2026+2027), QofE report, additional FY23/FY22 historicals. ccardenas@wintrust.com · 312-447-7353'},
+    {name:'PNC Bank',contact:'Jeff Martinez',type:'Primary LOC · Increase pending',urgency:'High',urgencyColor:'#B03030',borderColor:'#3030AF',notes:'Current LOC at $650K drawn / $350K available. Next interest payment June 5. Historically grants line bumps this time of year. David engaging Jeff after Wintrust term sheet lands (more leverage). Goal: secure increase before June 30 line renewal. Renewal was pushed a month last year due to document issue — gives a bit more runway.'},
+    {name:'BMO',contact:'Via Adela Cepeda',type:'New Relationship · Conversation active',urgency:'Medium',urgencyColor:'#C8841A',borderColor:'#3030AF',notes:'Middle market, food manufacturing focus. May lean on Q1 having been a down quarter and base interest on 6/30 numbers. Parallel to PNC + Wintrust.'},
+  ],
+  portfolioStats: [
+    {label:'YTD Net Sales',value:'$2.87M',sub:'Q1 2026',accent:'#191970'},
+    {label:'YTD Gross Profit',value:'$900K',sub:'31.3% margin',accent:'#2E8B57'},
+    {label:'YTD EBITDA',value:'($719K)',sub:'Seasonal trough',accent:'#B03030'},
+    {label:'2026 Target',value:'$25M+',sub:'15–18% EBITDA',accent:'#191970'},
+  ],
+  ogsm: [
+    {code:'01',label:'Growth',headline:'$25M+ net sales',detail:'Crackers behind YTD; peak season order book points to finishing ahead. H2 capacity committed. South Shore DTC launch. GFI, TFM, Publix channel development.'},
+    {code:'02',label:'Profitability',headline:'15–18% EBITDA',detail:'Q1 drag driven by PL timing, brand investment, taxes, and compensation spend. Single-forecast discipline. Complexity and waste reduction.'},
+    {code:'03',label:'Reliability',headline:'Forecast accuracy · OTIF · Fire-drill count',detail:'Direct cause of Q1 absorption hit. Salesforce-led forecasting with monthly review. Earlier planning for seasonality and promotions.'},
+    {code:'04',label:'Maturity',headline:'Named process owners · Operating cadence',detail:'Weekly / monthly / quarterly reviews. ERP direction and data integrity. Process ownership enabled by AI tooling.'},
+  ],
+  brands: [
+    {name:'South Shore',desc:'Ancient grain puff snacks · National brand growth engine'},
+    {name:'Mariner',desc:'Snack crackers · Branded plus private label'},
+    {name:'Capecchio',desc:'Entertainment and water crackers'},
+    {name:"Nejaime's",desc:'Flatbreads'},
+  ],
+  capitalLayers: [
+    {num:1,name:'Permanent Sisu Capital',status:'ACTIVE',detail:'Balance sheet. Holds and compounds indefinitely. Never sells unless economics or people change.'},
+    {num:2,name:'Venus Acquisition Holdings SPV',status:'ACTIVE',detail:'Partners Crackers + 2 proprietary Q2 \'26 targets. SPV structure for direct investor participation.'},
+    {num:3,name:'Sisu Shared Services (SSS)',status:'BUILDING',detail:'~5% revenue intercompany charge across portfolio companies. Employees hold profit participation here.'},
+    {num:4,name:'Farm Team (Public Markets)',status:'PLANNED',detail:'Long-term minority positions in undervalued public companies. Launch late 2026. RMCF is the first thesis.'},
+  ],
+  advisoryMembers: [
+    {name:'Adela Cepeda',role:'Corporate Director · Financial Governance',value:'Banking introductions, capital structure, board governance. Introduced Wintrust and BMO.'},
+    {name:'Joyce Johnson-Miller',role:'CIO, Pacific Gate Capital',value:'Capital strategy, SPV design, private equity and credit investor alignment.'},
+    {name:'Cory L. Nettles',role:'Generation Growth Capital · PE Investor',value:'Deal flow, lower middle market platform expansion. Former Wisconsin Secretary of Commerce.'},
+    {name:'Gary E. McCullough',role:'Former CEO · Corporate Director',value:'Operator mentorship, CEO succession planning. Boards: TransDigm, Commercial Metals, Freeman Companies.'},
+    {name:'Ben Mascarello',role:'CEO, Genera · Packaging & Ops',value:'Manufacturing AI, packaging design, M&A integration. Former COO Novolex — 14 acquisitions.'},
+    {name:'Lander R. Brown',role:'Human Capital Strategist',value:'Talent architecture, Shared Services structure, M&A integration, culture and DEI strategy.'},
+    {name:'Timothy E. Waters',role:'COO, SF Conservation Corps',value:'Staff feedback loops, upskilling plans, culture and performance systems. Harvard MBA.'},
+    {name:'Lemuel Seabrook',role:'Retired Banking Exec · BMO Managing Director',value:'Alternative investments, derivatives, municipal finance, risk management. University of Chicago.'},
+  ],
+  advisoryActions: [
+    {item:'Kit Shah minority separation closes (~45 days)',owner:'David / Greg K.',due:'Late June'},
+    {item:'Wintrust $2.9M financing package · awaiting term sheet',owner:'David',due:'Next week'},
+    {item:'Governance cleanup post-separation',owner:'David / Greg K.',due:'Q2'},
+    {item:'COO / Plant Manager search continues',owner:'David / Lander',due:'Q2'},
+    {item:'AI tooling · Claude umbrella approval + leadership rollout',owner:'David / Lander',due:'Next 2 weeks'},
+    {item:'Source Arc\'teryx Atom Jackets (monogrammed Sisu) — request sizes from all 8 members',owner:'Aubrey',due:'Q3 prep'},
+    {item:'Share dashboard with board prior to Q3 quarterly review',owner:'David / Aubrey',due:'Pre Q3 meeting'},
+    {item:'Identify strategic bolt-on targets under Venus',owner:'David',due:'Q2'},
+    {item:'RMCF position-building and thesis development',owner:'David',due:'Ongoing'},
+    {item:'Soft-circle co-investor pool development',owner:'David',due:'2026'},
+    {item:'Outstanding NDAs — collect executed copies',owner:'Aubrey',due:'Ongoing'},
+    {item:'Next quarterly meeting: Q3 2026',owner:'Aubrey',due:'Q3 2026'},
+  ],
+  platforms: [
+    {name:'Venus Acquisition Holdings',phase:'Scale 2025–2026',status:'ACTIVE',companies:'Venus Brands (anchor) · Partners Crackers (diligence) · Proprietary Target Q2 \'26 (×2)'},
+    {name:'Health Care Platform',phase:'Late 2026 / 2027',status:'PLANNED',companies:''},
+    {name:'Industrial Platform',phase:'Late 2026 / 2027',status:'PLANNED',companies:''},
+    {name:'Tech & Data Platform',phase:'2027–2028',status:'PLANNED',companies:''},
+    {name:'Financial Services Platform',phase:'2027–2028',status:'PLANNED',companies:''},
+    {name:'Special Situations Platform',phase:'Opportunistic',status:'PLANNED',companies:''},
+  ],
+  timeline: [
+    {years:'2024–2025',label:'Build & Prove',status:'DONE',current:false,detail:'Modernize Venus. Install systems and KPIs. Prove the model through disciplined execution and capital efficiency.'},
+    {years:'2025–2026',label:'Scale',status:'NOW',current:true,detail:'Drive operational excellence and brand expansion. Prepare Venus for strategic tuck-in acquisitions with strong ROI discipline and balance sheet readiness.'},
+    {years:'2026–2027',label:'Compound',status:'PLANNED',current:false,detail:'Execute 2–3 tuck-ins under Venus. Finalize capital architecture. Launch Farm Team. Strengthen shared services and leadership depth.'},
+    {years:'2027–2028',label:'Institutionalize',status:'PLANNED',current:false,detail:'Integrate and optimize bolt-ons. Close second platform acquisition. Expand investor partnerships and shared governance systems.'},
+    {years:'2028–2029',label:'Elevate',status:'PLANNED',current:false,detail:'Operate multiple high-performing platforms. Balanced private/public engine. Scale global reach and institutional credibility.'},
+  ],
+  actionStatuses: {},
+};
+
+function loadData(key) {
+  const saved = S.get(key);
+  return saved !== null ? saved : JSON.parse(JSON.stringify(INIT[key]));
+}
+
+let data = {
+  weekItems: loadData('weekItems'),
+  actionItems: loadData('actionItems'),
+  secondaryDeals: loadData('secondaryDeals'),
+  banking: loadData('banking'),
+  portfolioStats: loadData('portfolioStats'),
+  ogsm: loadData('ogsm'),
+  brands: loadData('brands'),
+  capitalLayers: loadData('capitalLayers'),
+  advisoryMembers: loadData('advisoryMembers'),
+  advisoryActions: loadData('advisoryActions'),
+  platforms: loadData('platforms'),
+  timeline: loadData('timeline'),
+  actionStatuses: loadData('actionStatuses'),
+};
+
+function save(key) { S.set(key, data[key]); }
+
+function pill(type) {
+  return `<span class="pill pill-${type}">${type==='CRITICAL'?'Critical':type==='HIGH'?'High':type==='MEDIUM'?'Medium':type==='ACTIVE'?'Active':type==='BUILDING'?'Building':type==='PLANNED'?'Planned':type==='DONE'?'Done':type==='NOW'?'Now ←':type==='PRIMARY'?'Primary ★':type==='SCREEN'?'Screening':type==='WATCH'?'Watch':type==='COMPLETE'?'Complete':type==='INPROG'?'In Progress':type==='PUBLIC'?'Public Mkts':type==='CLOSED'?'Closed':type}</span>`;
+}
+
+function switchTab(id, btn) {
+  document.querySelectorAll('[id^="tab-"]').forEach(t=>t.classList.add('hidden'));
+  document.getElementById('tab-'+id).classList.remove('hidden');
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function toggleEdit() {
+  editMode = !editMode;
+  const btn = document.getElementById('edit-toggle');
+  btn.classList.toggle('on', editMode);
+  btn.textContent = editMode ? '✓ Edit Mode On' : 'Edit Mode';
+  document.querySelectorAll('.edit-only').forEach(el=>el.classList.toggle('hidden',!editMode));
+  renderAll();
+}
+
+function toggleForm(id) {
+  const el = document.getElementById(id);
+  el.classList.toggle('hidden');
+}
+
+function toggleItem(key, id) {
+  openItems[key+id] = !openItems[key+id];
+  renderAll();
+}
+
+function toggleStatus(key) {
+  const statuses = data.actionStatuses;
+  statuses[key] = statuses[key] === 'done' ? null : 'done';
+  if(!statuses[key]) delete statuses[key];
+  save('actionStatuses');
+  updateDoneCount();
+  renderAll();
+}
+
+function updateDoneCount() {
+  const done = Object.values(data.actionStatuses).filter(v=>v==='done').length;
+  const total = data.weekItems.length + data.actionItems.length;
+  const el = document.getElementById('done-count');
+  el.textContent = done > 0 ? done+'/'+total+' done' : '';
+}
+
+function renderWeekItems() {
+  const c = document.getElementById('week-items');
+  c.innerHTML = data.weekItems.map((item,i)=>{
+    const isDone = data.actionStatuses[item.id]==='done';
+    const isOpen = openItems['week'+i];
+    return `<div style="background:${isDone?'#ECEAE8':'#fff'};border:1px solid ${isOpen?item.dot+'66':'#C8C7C4'};border-left:5px solid ${isDone?'#C8C7C4':item.dot};border-radius:4px;padding:13px 16px;opacity:${isDone?.6:1};">
+      <div class="flex-between" style="align-items:center;">
+        <div class="flex-center" style="flex:1;min-width:0;">
+          <input type="checkbox" ${isDone?'checked':''} onchange="toggleStatus('${item.id}')" style="width:15px;height:15px;accent-color:#2BBF6C;flex-shrink:0;" />
+          <div onclick="toggleItem('week',${i})" style="cursor:pointer;">
+            <div style="font-size:14px;color:#191970;font-weight:700;text-decoration:${isDone?'line-through':'none'};">${item.title}</div>
+            <div style="font-size:11px;color:#777672;font-family:monospace;margin-top:2px;">${item.context}</div>
+          </div>
+        </div>
+        <div class="flex-center" style="flex-shrink:0;">
+          ${!isDone?pill(item.urgency):''}
+          ${editMode?`<button class="del-btn" onclick="deleteWeekItem(${i})" style="margin-left:6px;">✕</button>`:''}
+          <span style="font-size:11px;color:#777672;cursor:pointer;margin-left:6px;" onclick="toggleItem('week',${i})">${isOpen?'▲':'▼'}</span>
+        </div>
+      </div>
+      ${isOpen?`<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ECEAE8;font-size:13px;color:#333;line-height:1.6;">${item.note}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderActionItems() {
+  const c = document.getElementById('action-items');
+  c.innerHTML = data.actionItems.map((item,i)=>{
+    const isDone = data.actionStatuses['action-'+item.id]==='done';
+    const isOpen = openItems['action'+i];
+    return `<div style="background:#fff;border:1px solid ${isDone?'#C8C7C4':isOpen?'#2E8B5744':'#C8C7C4'};border-radius:4px;overflow:hidden;opacity:${isDone?.55:1};">
+      <div style="padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:${isOpen?'#ECEAE8':'#fff'};">
+        <div class="flex-center" style="flex:1;">
+          <input type="checkbox" ${isDone?'checked':''} onchange="toggleStatus('action-${item.id}')" style="width:15px;height:15px;accent-color:#2BBF6C;flex-shrink:0;" />
+          <div style="width:22px;height:22px;border-radius:50%;background:${isDone?'#C8C7C4':'#191970'};color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:monospace;font-weight:700;flex-shrink:0;">${item.id}</div>
+          <div>
+            <div style="font-size:13px;color:#191970;font-weight:700;text-decoration:${isDone?'line-through':'none'};">${item.title}</div>
+            <div style="font-size:11px;color:#777672;font-family:monospace;margin-top:1px;">Owner: ${item.owner} · Due: ${item.due}</div>
+          </div>
+        </div>
+        <div class="flex-center" style="flex-shrink:0;cursor:pointer;" onclick="toggleItem('action',${i})">
+          ${!isDone?pill(item.urgency):pill('COMPLETE')}
+          ${editMode?`<button class="del-btn" onclick="event.stopPropagation();deleteActionItem(${i})" style="margin-left:4px;">✕</button>`:''}
+          <span style="font-size:11px;color:#777672;margin-left:6px;">${isOpen?'▲':'▼'}</span>
+        </div>
+      </div>
+      ${isOpen?`<div style="padding:12px 16px;border-top:1px solid #C8C7C4;font-size:13px;color:#333;line-height:1.6;">${item.detail}</div>`:''}
+    </div>`;
+  }).join('');
+}
+
+function renderPrimaryDeal() {
+  const d = data.primaryDeal || {name:'Partners Crackers',location:'Seattle, WA',stage:'Diligence',gate:'Fast Kill Test pending',contacts:'Cara Figgins · Greg Maestretti',notes:'Highest priority acquisition. Strengthens footprint, customer base, and operational capacity under Venus Acquisition Holdings. No capital without Delphi evaluation.',next:'Complete Delphi evaluation. Draft 1-page IC memo. Advance SPV structure.'};
+  const isOpen = openItems['primary'];
+  document.getElementById('primary-deal').innerHTML = `
+    <div class="card highlight">
+      <div onclick="toggleItem('primary',0)" style="cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+        <div style="flex:1;">
+          <div class="flex-center mb8"><span style="font-size:18px;color:#2E8B57;">★</span><span style="font-size:17px;color:#191970;font-weight:700;">${d.name}</span>${pill('PRIMARY')}</div>
+          <div style="font-size:11px;color:#777672;font-family:monospace;">${d.location} · Stage: ${d.stage} · Gate: ${d.gate}</div>
+        </div>
+        <span style="font-size:11px;color:#777672;">${isOpen?'▲':'▼'}</span>
+      </div>
+      ${isOpen?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid #C8C7C4;">
+        <div style="font-size:13px;color:#333;line-height:1.6;margin-bottom:10px;">${d.notes}</div>
+        <div style="font-size:11px;color:#777672;font-family:monospace;margin-bottom:10px;">Contacts: ${d.contacts}</div>
+        <div style="padding:10px 14px;background:#ECEAE8;border:1px solid #C8C7C4;border-radius:3px;font-size:12px;color:#333;"><strong>Next:</strong> ${d.next}</div>
+        ${editMode?`<div class="mt12"><button class="edit-btn" onclick="editPrimaryDeal()">Edit Primary Deal</button></div>`:''}
+      </div>`:''}
+    </div>`;
+}
+
+function renderSecondaryDeals() {
+  const tbody = document.getElementById('secondary-deals');
+  tbody.innerHTML = data.secondaryDeals.map((d,i)=>`
+    <tr>
+      <td style="font-weight:700;color:#191970;">${d.name}</td>
+      <td>${pill(d.gate)}</td>
+      <td style="font-size:12px;color:#777672;font-style:italic;">${d.note||'—'}</td>
+      ${editMode?`<td><button class="del-btn" onclick="deleteSecondaryDeal(${i})">✕</button></td>`:''}
+    </tr>`).join('');
+  document.querySelectorAll('.edit-only').forEach(el=>el.classList.toggle('hidden',!editMode));
+}
+
+function renderPublicMarkets() {
+  const rm = {name:'Rocky Mountain Chocolate Factory',ticker:'Nasdaq: RMCF',thesis:'Take-private turnaround',ceo:'Jeffrey Geygan (activist-aligned)',signals:['Activist-aligned governance already in the CEO seat','Margin inflection underway via dynamic pricing','Cocoa cost tailwind normalizing'],approach:'Disciplined position-building and thesis development. No urgency. Long-duration lens.'};
+  const isOpen = openItems['rmcf'];
+  document.getElementById('public-markets-section').innerHTML = `
+    <div class="card" style="border:1px solid rgba(90,62,138,.27);">
+      <div onclick="toggleItem('rmcf',0)" style="cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+        <div style="flex:1;">
+          <div class="flex-center mb8"><span style="font-size:16px;color:#5a3e8a;">◈</span><span style="font-size:17px;color:#191970;font-weight:700;">${rm.name}</span>${pill('PUBLIC')}</div>
+          <div style="font-size:11px;color:#777672;font-family:monospace;">${rm.ticker} · ${rm.thesis}</div>
+        </div>
+        <span style="font-size:11px;color:#777672;">${isOpen?'▲':'▼'}</span>
+      </div>
+      ${isOpen?`<div style="margin-top:14px;padding-top:14px;border-top:1px solid #C8C7C4;">
+        <div style="font-size:12px;color:#333;margin-bottom:10px;">CEO: ${rm.ceo}</div>
+        <ul style="margin:0 0 12px 0;padding-left:18px;">${rm.signals.map(s=>`<li style="font-size:13px;color:#333;line-height:1.7;">${s}</li>`).join('')}</ul>
+        <div style="padding:10px 14px;background:#ECEAE8;border:1px solid #C8C7C4;border-radius:3px;font-size:12px;color:#333;">${rm.approach}</div>
+      </div>`:''}
+    </div>`;
+}
+
+function renderBanking() {
+  const c = document.getElementById('banking-list');
+  c.innerHTML = data.banking.map((b,i)=>`
+    <div class="card" style="border-left:5px solid ${b.borderColor};">
+      <div class="flex-between mb12" style="flex-wrap:wrap;">
+        <div>
+          <div style="font-size:17px;color:#191970;font-weight:700;">${b.name}</div>
+          <div style="font-size:11px;color:#777672;font-family:monospace;margin-top:2px;">${b.contact} · ${b.type}</div>
+        </div>
+        <div class="flex-center">
+          ${pill('ACTIVE')}
+          <span style="font-size:10px;font-family:monospace;color:${b.urgencyColor};background:${b.urgencyColor}18;border:1px solid ${b.urgencyColor}33;padding:3px 9px;border-radius:2px;text-transform:uppercase;margin-left:6px;">${b.urgency}</span>
+          ${editMode?`<button class="del-btn" style="margin-left:6px;" onclick="deleteBanking(${i})">✕</button>`:''}
+        </div>
+      </div>
+      <div style="font-size:13px;color:#333;line-height:1.6;" id="bk-notes-${i}">${b.notes}</div>
+      ${editMode?`<div class="mt8"><button class="edit-btn" onclick="editBankingNotes(${i})">Edit Notes</button></div>`:''}
+    </div>`).join('');
+}
+
+function renderPortfolioStats() {
+  document.getElementById('portfolio-stats').innerHTML = data.portfolioStats.map((s,i)=>`
+    <div class="stat-box">
+      <div class="stat-label">${s.label}</div>
+      <div class="stat-value" style="color:${s.accent};" id="stat-val-${i}">${s.value}</div>
+      <div class="stat-sub">${s.sub}</div>
+      ${editMode?`<button class="edit-btn mt8" onclick="editStat(${i})">Edit</button>`:''}
+    </div>`).join('');
+}
+
+function renderOgsm() {
+  document.getElementById('ogsm-grid').innerHTML = data.ogsm.map((o,i)=>`
+    <div class="card" style="border-top:3px solid #C8841A;">
+      <div class="flex-between mb8">
+        <div style="font-size:9px;color:#777672;font-family:monospace;letter-spacing:.15em;text-transform:uppercase;">${o.code} · ${o.label}</div>
+        ${pill('WATCH')}
+      </div>
+      <div style="font-size:13px;color:#191970;font-weight:700;margin-bottom:6px;line-height:1.4;">${o.headline}</div>
+      <div style="font-size:12px;color:#333;line-height:1.6;font-style:italic;">${o.detail}</div>
+      ${editMode?`<button class="edit-btn mt8" onclick="editOgsm(${i})">Edit Detail</button>`:''}
+    </div>`).join('');
+}
+
+function renderBrands() {
+  document.getElementById('brands-grid').innerHTML = data.brands.map((b,i)=>`
+    <div class="card" style="padding:14px 16px;border-left:4px solid #2E8B57;">
+      <div style="font-size:14px;color:#191970;font-weight:700;margin-bottom:4px;">${b.name}</div>
+      <div style="font-size:12px;color:#777672;">${b.desc}</div>
+      ${editMode?`<button class="del-btn mt8" onclick="deleteBrand(${i})">Remove</button>`:''}
+    </div>`).join('');
+}
+
+function renderCapital() {
+  document.getElementById('capital-layers').innerHTML = data.capitalLayers.map((c,i)=>`
+    <div class="card" style="border-left:5px solid ${c.status==='ACTIVE'?'#2E8B57':c.status==='BUILDING'?'#3030AF':'#C8C7C4'};">
+      <div class="flex-between mb8">
+        <div class="flex-center">
+          <div style="width:28px;height:28px;border-radius:50%;background:#191970;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-family:monospace;font-weight:700;flex-shrink:0;">${c.num}</div>
+          <div style="font-size:16px;color:#191970;font-weight:700;">${c.name}</div>
+        </div>
+        <div class="flex-center">
+          ${pill(c.status)}
+          ${editMode?`<select class="form-select" style="width:120px;margin-left:8px;padding:3px 6px;font-size:11px;" onchange="updateCapitalStatus(${i},this.value)"><option ${c.status==='ACTIVE'?'selected':''}>ACTIVE</option><option ${c.status==='BUILDING'?'selected':''}>BUILDING</option><option ${c.status==='PLANNED'?'selected':''}>PLANNED</option></select>`:''}
+        </div>
+      </div>
+      <div style="font-size:13px;color:#333;line-height:1.6;" id="cap-detail-${i}">${c.detail}</div>
+      ${editMode?`<button class="edit-btn mt8" onclick="editCapitalDetail(${i})">Edit Detail</button>`:''}
+    </div>`).join('');
+}
+
+function renderAdvisory() {
+  document.getElementById('advisory-members').innerHTML = data.advisoryMembers.map((m,i)=>`
+    <div class="card" style="padding:16px 18px;">
+      <div class="flex-between mb8">
+        <div>
+          <div style="font-size:14px;color:#191970;font-weight:700;">${m.name}</div>
+          <div style="font-size:11px;color:#777672;font-family:monospace;margin-top:2px;">${m.role}</div>
+        </div>
+        ${editMode?`<button class="del-btn" onclick="deleteAdvisory(${i})">✕</button>`:''}
+      </div>
+      <div style="font-size:12px;color:#333;line-height:1.6;font-style:italic;">${m.value}</div>
+    </div>`).join('');
+
+  document.getElementById('advisory-actions').innerHTML = data.advisoryActions.map((a,i)=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:#fff;border:1px solid #C8C7C4;border-radius:3px;">
+      <div style="font-size:13px;color:#333;">${a.item}</div>
+      <div class="flex-center">
+        <span style="font-size:11px;color:#777672;font-family:monospace;white-space:nowrap;">${a.owner} · ${a.due}</span>
+        ${editMode?`<button class="del-btn" style="margin-left:8px;" onclick="deleteAdvisoryAction(${i})">✕</button>`:''}
+      </div>
+    </div>`).join('');
+}
+
+function renderPlatforms() {
+  document.getElementById('platforms-list').innerHTML = data.platforms.map((p,i)=>`
+    <div class="card" style="padding:13px 17px;border-left:5px solid ${p.status==='ACTIVE'?'#2E8B57':'#C8C7C4'};">
+      <div class="flex-between" style="flex-wrap:wrap;align-items:center;">
+        <div style="flex:1;">
+          <div style="font-size:14px;color:#191970;font-weight:700;">${p.name}</div>
+          ${p.companies?`<div style="font-size:12px;color:#777672;margin-top:3px;">${p.companies}</div>`:''}
+        </div>
+        <div class="flex-center">
+          <span style="font-size:11px;color:#777672;font-family:monospace;">${p.phase}</span>
+          ${pill(p.status==='ACTIVE'?'ACTIVE':'PLANNED')}
+          ${editMode?`<button class="del-btn" style="margin-left:8px;" onclick="deletePlatform(${i})">✕</button>`:''}
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderTimeline() {
+  document.getElementById('timeline').innerHTML = data.timeline.map((t,i)=>`
+    <div style="display:flex;">
+      <div style="display:flex;flex-direction:column;align-items:center;width:40px;flex-shrink:0;">
+        <div style="width:13px;height:13px;border-radius:50%;background:${t.current?'#2BBF6C':t.status==='DONE'?'#191970':'#C8C7C4'};margin-top:18px;"></div>
+        ${i<data.timeline.length-1?`<div style="width:2px;flex:1;background:#C8C7C4;min-height:20px;"></div>`:''}
+      </div>
+      <div style="flex:1;padding:10px 0 12px 14px;">
+        <div class="card" style="padding:13px 17px;border-left:5px solid ${t.current?'#2BBF6C':'#C8C7C4'};">
+          <div class="flex-between mb8" style="flex-wrap:wrap;">
+            <div>
+              <div style="font-size:9px;color:#777672;font-family:monospace;letter-spacing:.15em;margin-bottom:2px;">${t.years}</div>
+              <div style="font-size:15px;color:#191970;font-weight:700;">${t.label}</div>
+            </div>
+            ${pill(t.status==='DONE'?'DONE':t.status==='NOW'?'NOW':'PLANNED')}
+          </div>
+          <div style="font-size:13px;color:#333;line-height:1.6;">${t.detail}</div>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function renderAll() {
+  renderWeekItems();
+  renderActionItems();
+  renderPrimaryDeal();
+  renderSecondaryDeals();
+  renderPublicMarkets();
+  renderBanking();
+  renderPortfolioStats();
+  renderOgsm();
+  renderBrands();
+  renderCapital();
+  renderAdvisory();
+  renderPlatforms();
+  renderTimeline();
+  document.querySelectorAll('.edit-only').forEach(el=>el.classList.toggle('hidden',!editMode));
+  updateDoneCount();
+}
+
+// ADD FUNCTIONS
+function addWeekItem() {
+  const title = document.getElementById('wi-title').value.trim();
+  if(!title) return;
+  data.weekItems.push({id:'tw-'+Date.now(),urgency:document.getElementById('wi-urgency').value,dot:'#2BBF6C',title,context:document.getElementById('wi-context').value,note:document.getElementById('wi-note').value});
+  save('weekItems');
+  toggleForm('week-add-form');
+  ['wi-title','wi-context','wi-note'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+function addActionItem() {
+  const title = document.getElementById('ai-title').value.trim();
+  if(!title) return;
+  const maxId = data.actionItems.reduce((m,i)=>Math.max(m,i.id),0);
+  data.actionItems.push({id:maxId+1,title,owner:document.getElementById('ai-owner').value||'David',due:document.getElementById('ai-due').value||'TBD',urgency:document.getElementById('ai-urgency').value,detail:document.getElementById('ai-detail').value});
+  save('actionItems');
+  toggleForm('action-add-form');
+  ['ai-title','ai-owner','ai-due','ai-detail'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+function addSecondaryDeal() {
+  const name = document.getElementById('sd-name').value.trim();
+  if(!name) return;
+  data.secondaryDeals.push({name,gate:document.getElementById('sd-gate').value,note:document.getElementById('sd-note').value});
+  save('secondaryDeals');
+  toggleForm('secondary-add-form');
+  ['sd-name','sd-note'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+function addBanking() {
+  const name = document.getElementById('bk-name').value.trim();
+  if(!name) return;
+  const urgency = document.getElementById('bk-urgency').value;
+  data.banking.push({name,contact:document.getElementById('bk-contact').value,type:document.getElementById('bk-type').value,urgency,urgencyColor:urgency==='High'?'#B03030':'#C8841A',borderColor:'#3030AF',notes:document.getElementById('bk-notes').value});
+  save('banking');
+  toggleForm('banking-add-form');
+  ['bk-name','bk-contact','bk-type','bk-notes'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+function addBrand() {
+  const name = document.getElementById('br-name').value.trim();
+  if(!name) return;
+  data.brands.push({name,desc:document.getElementById('br-desc').value});
+  save('brands');
+  toggleForm('brand-add-form');
+  ['br-name','br-desc'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+function addAdvisory() {
+  const name = document.getElementById('adv-name').value.trim();
+  if(!name) return;
+  data.advisoryMembers.push({name,role:document.getElementById('adv-role').value,value:document.getElementById('adv-value').value});
+  save('advisoryMembers');
+  toggleForm('advisory-add-form');
+  ['adv-name','adv-role','adv-value'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+function addAdvisoryAction() {
+  const item = document.getElementById('aa-item').value.trim();
+  if(!item) return;
+  data.advisoryActions.push({item,owner:document.getElementById('aa-owner').value||'David',due:document.getElementById('aa-due').value||'TBD'});
+  save('advisoryActions');
+  toggleForm('advisory-action-add-form');
+  ['aa-item','aa-owner','aa-due'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+function addPlatform() {
+  const name = document.getElementById('pl-name').value.trim();
+  if(!name) return;
+  data.platforms.push({name,phase:document.getElementById('pl-phase').value,status:document.getElementById('pl-status').value,companies:document.getElementById('pl-companies').value});
+  save('platforms');
+  toggleForm('platform-add-form');
+  ['pl-name','pl-phase','pl-companies'].forEach(id=>document.getElementById(id).value='');
+  renderAll();
+}
+
+// DELETE FUNCTIONS
+function deleteWeekItem(i){data.weekItems.splice(i,1);save('weekItems');renderAll();}
+function deleteActionItem(i){data.actionItems.splice(i,1);save('actionItems');renderAll();}
+function deleteSecondaryDeal(i){data.secondaryDeals.splice(i,1);save('secondaryDeals');renderAll();}
+function deleteBanking(i){data.banking.splice(i,1);save('banking');renderAll();}
+function deleteBrand(i){data.brands.splice(i,1);save('brands');renderAll();}
+function deleteAdvisory(i){data.advisoryMembers.splice(i,1);save('advisoryMembers');renderAll();}
+function deleteAdvisoryAction(i){data.advisoryActions.splice(i,1);save('advisoryActions');renderAll();}
+function deletePlatform(i){data.platforms.splice(i,1);save('platforms');renderAll();}
+
+// EDIT FUNCTIONS
+function editStat(i) {
+  const val = prompt('Update value for '+data.portfolioStats[i].label+':',data.portfolioStats[i].value);
+  if(val===null) return;
+  const sub = prompt('Update sub-label:',data.portfolioStats[i].sub);
+  if(sub===null) return;
+  data.portfolioStats[i].value = val;
+  data.portfolioStats[i].sub = sub;
+  save('portfolioStats');
+  renderAll();
+}
+
+function editOgsm(i) {
+  const detail = prompt('Update detail for '+data.ogsm[i].label+':',data.ogsm[i].detail);
+  if(detail===null) return;
+  data.ogsm[i].detail = detail;
+  save('ogsm');
+  renderAll();
+}
+
+function editCapitalDetail(i) {
+  const detail = prompt('Update detail for '+data.capitalLayers[i].name+':',data.capitalLayers[i].detail);
+  if(detail===null) return;
+  data.capitalLayers[i].detail = detail;
+  save('capitalLayers');
+  renderAll();
+}
+
+function updateCapitalStatus(i,val) {
+  data.capitalLayers[i].status = val;
+  save('capitalLayers');
+  renderAll();
+}
+
+function editBankingNotes(i) {
+  const notes = prompt('Update notes for '+data.banking[i].name+':',data.banking[i].notes);
+  if(notes===null) return;
+  data.banking[i].notes = notes;
+  save('banking');
+  renderAll();
+}
+
+function editPortfolioContext() {
+  const val = prompt('Update portfolio context:',document.getElementById('portfolio-context').textContent);
+  if(val===null) return;
+  document.getElementById('portfolio-context').textContent = val;
+  S.set('portfolioContext',val);
+}
+
+function editSequencingRule() {
+  const val = prompt('Update sequencing rule:',document.getElementById('sequencing-rule').textContent);
+  if(val===null) return;
+  document.getElementById('sequencing-rule').textContent = val;
+  S.set('sequencingRule',val);
+}
+
+function editPrimaryDeal() {
+  const d = data.primaryDeal || {name:'Partners Crackers',location:'Seattle, WA',stage:'Diligence',gate:'Fast Kill Test pending',contacts:'Cara Figgins · Greg Maestretti',notes:'Highest priority acquisition.',next:'Complete Delphi evaluation.'};
+  const stage = prompt('Update stage:',d.stage);
+  if(stage===null) return;
+  const gate = prompt('Update gate:',d.gate);
+  if(gate===null) return;
+  const next = prompt('Update next steps:',d.next);
+  if(next===null) return;
+  data.primaryDeal = {...d,stage,gate,next};
+  S.set('primaryDeal',data.primaryDeal);
+  renderAll();
+}
+
+function archiveWeek() {
+  const btn = document.getElementById('archive-btn');
+  const archive = S.get('archive') || [];
+  archive.unshift({weekNum:20,dateRange:'May 11 – May 17, 2026',savedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),actionStatuses:data.actionStatuses});
+  S.set('archive',archive);
+  btn.classList.add('saved');
+  btn.textContent = '✓ Archived';
+  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='Archive Week 20';},2500);
+}
+
+// Load saved edits
+const savedContext = S.get('portfolioContext');
+const savedSeqRule = S.get('sequencingRule');
+const savedPrimaryDeal = S.get('primaryDeal');
+if(savedPrimaryDeal) data.primaryDeal = savedPrimaryDeal;
+
+renderAll();
+
+setTimeout(()=>{
+  if(savedContext) document.getElementById('portfolio-context').textContent = savedContext;
+  if(savedSeqRule) document.getElementById('sequencing-rule').textContent = savedSeqRule;
+},50);
+</script>
+</body>
+</html>
