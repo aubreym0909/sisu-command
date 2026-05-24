@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sisu Command · Week 20</title>
+<title>Sisu Command · Week 21</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Georgia',serif;background:#E5E4E2;color:#333333;min-height:100vh;}
@@ -130,13 +130,13 @@ tr:nth-child(even) td{background:#ECEAE8;}
       </div>
       <div class="header-right">
         <div>
-          <div class="week-num">Week 20</div>
-          <div class="week-range">May 11 – May 17, 2026</div>
+          <div class="week-num">Week 21</div>
+          <div class="week-range">May 17 – May 23, 2026 · Sun–Sat</div>
         </div>
         <div class="header-actions">
           <span class="done-count" id="done-count"></span>
           <button class="edit-toggle" id="edit-toggle" onclick="toggleEdit()">Edit Mode</button>
-          <button class="btn-archive" id="archive-btn" onclick="archiveWeek()">Archive Week 20</button>
+          <button class="btn-archive" id="archive-btn" onclick="archiveWeek()">Archive Week 21</button>
         </div>
       </div>
     </div>
@@ -157,7 +157,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
 
 <!-- THIS WEEK -->
 <div id="tab-week">
-  <div class="slabel mb16">Week 20 · May 11 – May 17, 2026 · Intelligence Layer</div>
+  <div class="slabel mb16">Week 21 · May 17 – May 23, 2026 · Sunday – Saturday · Intelligence Layer</div>
   <div id="week-items" class="col" style="gap:8px;"></div>
   <div id="week-add-form" class="form-box hidden mt16">
     <div class="slabel gray">Add weekly priority</div>
@@ -213,21 +213,26 @@ tr:nth-child(even) td{background:#ECEAE8;}
   <div class="edit-only hidden mb24"><button class="add-btn" onclick="toggleForm('secondary-add-form')">+ Add Secondary Deal</button></div>
 
   <!-- AXIAL DEAL FLOW -->
-  <div class="slabel mb16" style="color:#C8841A;border-bottom-color:rgba(200,132,26,.27);">Axial Deal Flow · Week 20 Snapshot</div>
+  <div class="slabel mb16" style="color:#C8841A;border-bottom-color:rgba(200,132,26,.27);">Axial Deal Flow · Week 21 Snapshot</div>
   <div class="grid-auto mb16">
     <div class="stat-box" style="border-left:4px solid #2E8B57;">
-      <div class="stat-label">Advanced to Salesforce</div>
-      <div class="stat-value" style="color:#2E8B57;">7</div>
-      <div class="stat-sub">This week</div>
+      <div class="stat-label">Advanced to Intro Meeting</div>
+      <div class="stat-value" style="color:#2E8B57;">2</div>
+      <div class="stat-sub">Aubrey sending emails</div>
+    </div>
+    <div class="stat-box" style="border-left:4px solid #C8841A;">
+      <div class="stat-label">Still Under Evaluation</div>
+      <div class="stat-value" style="color:#C8841A;">1</div>
+      <div class="stat-sub">Awaiting David decision</div>
     </div>
     <div class="stat-box" style="border-left:4px solid #3030AF;">
       <div class="stat-label">Active Deals</div>
       <div class="stat-value" style="color:#3030AF;">70</div>
       <div class="stat-sub">Awaiting CIM / NDA / review</div>
     </div>
-    <div class="stat-box" style="border-left:4px solid #C8841A;">
+    <div class="stat-box" style="border-left:4px solid #777672;">
       <div class="stat-label">Curated Deals</div>
-      <div class="stat-value" style="color:#C8841A;">39</div>
+      <div class="stat-value" style="color:#777672;">38</div>
       <div class="stat-sub">To be analyzed this week</div>
     </div>
     <div class="stat-box" style="border-left:4px solid #777672;">
@@ -238,15 +243,11 @@ tr:nth-child(even) td{background:#ECEAE8;}
   </div>
   <div class="card mb24" style="padding:0;overflow:auto;">
     <table>
-      <thead><tr><th>Project</th><th>Platform · Gist</th></tr></thead>
+      <thead><tr><th>Project</th><th>Status</th><th>Platform · Gist</th></tr></thead>
       <tbody>
-        <tr><td style="font-weight:700;color:#191970;">Project Dirtwork</td><td style="font-size:12px;color:#333;">South DFW excavation platform (J&amp;K Excavation / J&amp;K Trucking, Waxahachie TX). $21.3M TTM revenue · $3.0M TTM adj. EBITDA · $40M+ backlog · 65 W2.</td></tr>
-        <tr><td style="font-weight:700;color:#191970;">Project Forty-One</td><td style="font-size:12px;color:#333;">Pacific NW electrical services (Boone Electric, Puyallup WA — three brands: Boone, Linx, SURECOM). $29.7M 2025 revenue · $2.8M adj. EBITDA · ~165 employees · 90% repeat revenue.</td></tr>
-        <tr><td style="font-weight:700;color:#191970;">Project HeliSpray</td><td style="font-size:12px;color:#333;">Midwest aerial crop protection (The Helicopter Team, Central IL + Orlando FL). 17 helicopters · 650K+ acres/year · $8.8M 2025 revenue · $3.1M adj. EBITDA · 92.9% recurring.</td></tr>
-        <tr><td style="font-weight:700;color:#191970;">Project Molar</td><td style="font-size:12px;color:#333;">Dental IT MSP platform (DDS Tech + Dental Design Systems combined). National reach, CA/UT concentration. $7.39M TTM revenue · $2.21M TTM normalized EBITDA · 614 active dental clients.</td></tr>
-        <tr><td style="font-weight:700;color:#191970;">Project Precision</td><td style="font-size:12px;color:#333;">South FL commercial roofing (Precision Roofing Corp). 32 years operating · $19.9M 2025 revenue · $3.95M EBITDA · $10M+ backlog · ~32 W2.</td></tr>
-        <tr><td style="font-weight:700;color:#191970;">Project TSP</td><td style="font-size:12px;color:#333;">Michigan environmental remediation platform (TSP Environmental). Soil/groundwater remediation, abatement, wetland mitigation. $10.8M 2025 revenue · ~$2.0M adj. EBITDA.</td></tr>
-        <tr><td style="font-weight:700;color:#191970;">Project Rustic</td><td style="font-size:12px;color:#333;">Premium reclaimed lumber platform (Montana Reclaimed Lumber Co.). High-end residential/commercial, Gallatin / Big Sky / Yellowstone Club markets. $18.8M TTM revenue · $3.9M TTM EBITDA.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project Forty-One</td><td><span class="pill pill-ACTIVE">Intro Meeting</span></td><td style="font-size:12px;color:#333;">Pacific NW electrical services (Boone Electric, Puyallup WA — three brands: Boone, Linx, SURECOM). $29.7M 2025 revenue · $2.8M adj. EBITDA · ~165 employees · 90% repeat revenue.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project HeliSpray</td><td><span class="pill pill-ACTIVE">Intro Meeting</span></td><td style="font-size:12px;color:#333;">Midwest aerial crop protection (The Helicopter Team, Central IL + Orlando FL). 17 helicopters · 650K+ acres/year · $8.8M 2025 revenue · $3.1M adj. EBITDA · 92.9% recurring.</td></tr>
+        <tr><td style="font-weight:700;color:#191970;">Project TSP</td><td><span class="pill pill-INPROG">Under Evaluation</span></td><td style="font-size:12px;color:#333;">Michigan environmental remediation platform (TSP Environmental). Soil/groundwater remediation, abatement, wetland mitigation. $10.8M 2025 revenue · ~$2.0M adj. EBITDA.</td></tr>
       </tbody>
     </table>
   </div>
@@ -275,7 +276,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
   <div class="edit-only hidden mb20"><button class="add-btn" onclick="toggleForm('banking-add-form')">+ Add Relationship</button></div>
   <div style="padding:14px 18px;background:#191970;border-radius:4px;">
     <div class="slabel" style="color:#2BBF6C;border-color:rgba(43,191,108,.27);margin-bottom:8px;">Sequencing Rule</div>
-    <div style="font-size:13px;color:#fff;line-height:1.6;" id="sequencing-rule">Wintrust $2.9M financing package in active diligence — term sheet expected next week post Carlos review with Scott team. PNC LOC increase push follows Wintrust term sheet (leverage). BMO parallel conversation. All three relationships compounding, none replacing.</div>
+    <div style="font-size:13px;color:#fff;line-height:1.6;" id="sequencing-rule">Wintrust $2.9M financing package · Carlos reviewing updated internal analysis from May 15. Term sheet expected this week. Once it lands, David presses PNC for LOC bump (leverage). Goal: PNC increase before June 30 renewal. BMO parallel.</div>
     <div class="edit-only hidden mt8"><button class="edit-btn" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff;" onclick="editSequencingRule()">Edit Rule</button></div>
   </div>
 </div>
@@ -386,7 +387,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
       <div class="footer-rule"><div class="footer-dot"></div>No external narrative without 1-page IC memo.</div>
       <div class="footer-rule"><div class="footer-dot"></div>Passing is success when discipline holds.</div>
     </div>
-    <div class="footer-stamp">SISU INVESTMENT HOLDINGS · WEEK 20 · MAY 11, 2026 · CONFIDENTIAL — DAVID LEWIS ONLY</div>
+    <div class="footer-stamp">SISU INVESTMENT HOLDINGS · WEEK 21 · MAY 17, 2026 · CONFIDENTIAL — DAVID LEWIS ONLY</div>
   </div>
 </div>
 
@@ -401,68 +402,72 @@ let openItems = {};
 
 const INIT = {
   weekItems: [
-    {id:'tw1',urgency:'CRITICAL',dot:'#3030AF',title:'Wintrust $2.9M financing package · Awaiting term sheet',context:'Active · Carlos Cardenas',note:'Scott + team updating internal analysis from May 15 call. Reviewing with Carlos on Monday upon return. Reverting with timeline, structure, and credit feedback next week. Package: $2M term loan refinance + $270K Kit Shah buyout + $2M new LOC. David to send hard numbers substantiating $6M Aldi incremental, QofE report, and remaining historical financials.'},
-    {id:'tw2',urgency:'CRITICAL',dot:'#3030AF',title:'Kit Shah minority separation',context:'~45 days to close · Late June target',note:'Buyout cost ~$270K rolled into new term loan. Removes him as guarantor on banking relationship. Closing within ~45 days. No external narrative without 1-page IC memo. Coordinate with Greg Kilpatrick.'},
-    {id:'tw3',urgency:'CRITICAL',dot:'#3030AF',title:'Q1 cash flow gap · 4-week low-income window',context:'Liquidity watch · LOC $650K drawn / $350K available',note:'$500K expected end of next week (30-45 days out). 4-week period of limited income due to weak prior-3-week sales ($93K, $113K). Next interest payment June 5. David engaging PNC for LOC bump after Wintrust term sheet lands. Goal: secure increase before June 30 line renewal.'},
-    {id:'tw4',urgency:'HIGH',dot:'#2E8B57',title:'Stone Ground Crackers lawsuit · Motion to dismiss',context:'Response due June 10 · McGuire Woods',note:'Spencer Sheehan plaintiff. NY GBL §§ 349 & 350. Motion to dismiss leveraging Randolph (SDNY). Counsel sending joint rep letter (Venus + Albertsons), document collection memo, and draft motion. Need NY-specific sales data and milling process detail to substantiate "stone ground" labeling.'},
-    {id:'tw5',urgency:'HIGH',dot:'#2E8B57',title:'Harry & David production launch',context:'First week of June · $1.82M total volume',note:'Parts air-freighted next week. Corrugate in May 26. Mock-up samples week of 5/26 to set up line and collect efficiency data. 13-14 total truckloads (Aldi + H&D) driving ramp. July will be peak — staffing the constraint.'},
-    {id:'tw6',urgency:'HIGH',dot:'#2E8B57',title:'Azus Standard e-commerce opportunity',context:'New · Saltines / Thin Wheats / Classic Golden',note:'C-free oils requirement. Azus supplying all ingredients (flour, avocado oil, palm oil). Avocado oil = full sanitation between runs (significant cost). ~6 pallets per item × 3 items = ~18hrs production. Charge them for samples. Long-term ongoing if Phase 1 hits.'},
-    {id:'tw7',urgency:'HIGH',dot:'#2E8B57',title:'Seasoning equipment bottleneck · 20-week lead time',context:'Blocks snack cracker + puff scale',note:'Tumbler quote: 20 weeks. Slurry system: $170-200K (superior for cheese coatings). Without it, snack crackers + puffs cannot launch on schedule. David pursuing vendor lead-time reduction, financing, and Foodservice benchmarking.'},
-    {id:'tw8',urgency:'HIGH',dot:'#2E8B57',title:'Claude umbrella · AI governance rollout',context:'Approve next week · Then leadership team',note:'Lander delivering revised "Claude umbrella" master prompt before next weekly meeting. Two products: CSU AI Principles + Prompting Instructions. Plan: approve at next meeting, present to leadership team after. Leaders to initial principles and confirm receipt via email.'},
-    {id:'tw9',urgency:'HIGH',dot:'#2E8B57',title:'Travel bookings · Book on May 18',context:'NY Capital Alliance / Vail / Boston ×3',note:'NY Capital Alliance: arrive Sunday midday, depart Wed ~4pm. Vail: confirm group discount expiration, then book lodging + flight. Boston July: 14-15, 20-22 (arrive evening 20th, depart evening 22nd), 28-29 — all confirmed by Kendra for Ben.'},
-    {id:'tw10',urgency:'HIGH',dot:'#2E8B57',title:'Conrad Athens billing discrepancy',context:'Active · ~€600 gap',note:'Charged €2,336 vs. expected €1,752-1,776 with 25% YPO group discount. Group discount appears not applied. Aubrey reaching out via email to reconcile.'},
-    {id:'tw11',urgency:'MEDIUM',dot:'#2BBF6C',title:'Greece / Africa multi-leg itinerary',context:'Aug 28 – Sept 2 retreat · Book flights June',note:'Plan: Chicago → Greece → Africa → Chicago. Retreat dates Aug 28-Sept 2 (Visit Roger Gracie). Need Africa registration requirements + pricing before booking multi-leg. Lodging Greece paid. Cyprus small contingency if Africa falls through.'},
-    {id:'tw12',urgency:'MEDIUM',dot:'#2BBF6C',title:'Family insurance underwriting · Project Help My Family',context:'6-8 weeks · Carl Bailey',note:'Mom + stepmom: $100K death benefit each, $4K total annual premium budget. Carl confirming Indiana licensing or referral. Intake forms to family members (Rhonda, Annette, Vincent — brother as temp). Consolidate all premiums into quarterly Ameriprise pull.'},
-    {id:'tw13',urgency:'MEDIUM',dot:'#2BBF6C',title:'DAF funding execution · Fidelity transfer',context:'$10K minimum + $15K cash to hit $25K annual',note:'Transfer form signed and back to Carl. Funding from Ameriprise: OTC Fidelity + Apple + Berkshire + tax-exempt MMF. Future contributions: appreciated stock preferred over cash. $1K minimum subsequent, $100 minimum grant.'},
-    {id:'tw14',urgency:'MEDIUM',dot:'#2BBF6C',title:'Production scheduling redesign · 13-week horizon',context:'Matt + Nick · Excel master model',note:'Splitting baking vs. packaging. Materials tracking layered in (baking 4-5 days, packaging 6 weeks). Goal: control costs + shrink sale-to-cash window. Validate against Nick\'s current process. Claude code to explore for sustainability.'},
-    {id:'tw15',urgency:'MEDIUM',dot:'#2BBF6C',title:'Bourbon maple BBQ · Base flavor decision',context:'NPD · Foodsource',note:'Bourbon maple emerged as top base barbecue across Kevin, Brandon, and David. Cocoa agave good but not the base. Strategy: anchor line with one strong base, rotate LTOs to explore (test in DTC variety packs). Brief on barbecue going to Foodsource for first dev round.'},
-    {id:'tw16',urgency:'MEDIUM',dot:'#2BBF6C',title:'Rhonda property maintenance · Project Help My Family',context:'In motion',note:'Lawn service confirmed at $60/visit biweekly via TaskRabbit (Aubrey). Full-year contract being scoped including treatment program (True Green for treatments). Snow shoveling quote pending. German not responding on initial property assessment — David texted directly. Address clarification: 1309 W 47th is stepmom\'s, Rhonda\'s is different.'},
-    {id:'tw17',urgency:'MEDIUM',dot:'#2BBF6C',title:'Field Notes page · Website revision round',context:'Push depends on Ronald finishing South Shore',note:'Annual Letters header revised (plural). Ahmed event summary added to "Latest from Sisu." Nature/exploration imagery for menu photo (Ayman preparing 3 options). New vision-focused quote being drafted (replacing "home for businesses worth owning forever"). Ayman fee $200 — accepted.'},
-    {id:'tw18',urgency:'MEDIUM',dot:'#2BBF6C',title:'RMCF thesis development',context:'Public markets · Nasdaq: RMCF',note:'Disciplined position-building continues. Activist-aligned CEO (Jeffrey Geygan). Margin inflection via dynamic pricing. Cocoa cost tailwind normalizing.'},
+    {id:'tw1',urgency:'CRITICAL',dot:'#3030AF',title:'Wintrust $2.9M financing package · Awaiting term sheet',context:'Active · Carlos back this week',note:'Carlos returning to update internal analysis with David\'s May 15 detail. Reverting next week with timeline, structure, credit feedback. Package: $2M term refinance + $270K Kit Shah buyout + new $2M LOC. Once term sheet lands, David pushes PNC for LOC bump (leverage).'},
+    {id:'tw2',urgency:'CRITICAL',dot:'#3030AF',title:'Pay travel today · Boston / Vail / Capital Alliance',context:'May 18 · Add to Lewis base calendar',note:'Boston flights + hotel (Jul 14-15, 20-22, 28-29 — Kendra confirmed Ben). Vail hotel (Chase card). Capital Alliance hotel + flight (United credits). Share all itineraries to Lewis base calendar so Keisha sees travel dates. Athens flight defers to June.'},
+    {id:'tw3',urgency:'CRITICAL',dot:'#3030AF',title:'Production efficiency model · Nick walkthrough Wed',context:'Wed 10:30am ET follow-up',note:'13-week rolling model presented to Nick May 18. Nick concerns to digest: changeovers grown 20 → 40/week, GFI just-in-time fragments runs, paper data won\'t capture labor reality, packaging vs baking time split. Nick to write running list of feedback for next iteration. Long-term: code-built rolling 14-week with actual vs budget comps. Phased rollout: Production → Logistics → Finance → automation.'},
+    {id:'tw4',urgency:'CRITICAL',dot:'#3030AF',title:'Stone Ground Crackers lawsuit · Motion to dismiss',context:'Response due June 10 · McGuire Woods',note:'Spencer Sheehan plaintiff. NY GBL §§ 349 & 350. Motion to dismiss leveraging Randolph (SDNY). McGuire Woods sending joint rep letter (Venus + Albertsons), document collection memo, and draft motion. Need NY-specific Acme sales data and milling process detail to substantiate "stone ground" labeling vs Randolph.'},
+    {id:'tw5',urgency:'HIGH',dot:'#2E8B57',title:'Kit Shah minority separation',context:'~45 days to close · Late June',note:'$270K buyout rolled into new term loan. Removes him as guarantor. Closing within ~45 days. No external narrative without 1-page IC memo. Coordinate with Greg Kilpatrick.'},
+    {id:'tw6',urgency:'HIGH',dot:'#2E8B57',title:'Q1 cash flow gap · 4-week low-income window',context:'LOC $650K drawn / $350K available',note:'$500K expected end of next week (30-45 days). 4 weeks of low income from weak prior-3-week sales ($93K / $113K). Next interest payment June 5. Goal: secure PNC LOC bump before June 30 renewal.'},
+    {id:'tw7',urgency:'HIGH',dot:'#2E8B57',title:'Formic palletizer · Bottom support pivot · DocuSign incoming',context:'~6-week lead from signature',note:'Switching both systems from suction to bottom support tool. Raises stack height limit 80" → 84" — covers 95% of SKUs. Exceptions: A00010 + A00015 (need manual top-off last row — lightweight, OK) and one 10-pack box too small. Fork-tool end effector in dev for full coverage (end-of-year target, no-cost swap if it passes). RJ leaving Formic — Amanda (Northeast, Waltham-based) is new POC.'},
+    {id:'tw8',urgency:'HIGH',dot:'#2E8B57',title:'Backlog blitz · Close out Weeks 15–20',context:'Kevin · Nick · On pace',note:'Wks 15+18 closed pending Canadian customs + Whole Foods confirmation. Wk 19 dependent on external pull. Wk 20 all except Aldi shipping by Wednesday (Safeway, Victory, Weiss, UPS smalls). Wk 21 KeHE + Loblaws on track for Friday shipment. 2.5+ truckloads going out this week.'},
+    {id:'tw9',urgency:'HIGH',dot:'#2E8B57',title:'Safeway buffer vs packaging changeover · Communication required',context:'Conflict · Nick + Jim + Kevin',note:'Safeway ordering erratically; team running just-in-time with zero buffer. Nick proposes +2 pallets/flavor to enable truckload consolidation. But: old packaging being depleted ahead of new artwork transition. Risk: stuck with obsolete inventory. Build small transitional buffer with constant Safeway comm. Case label approval = critical path before new packaging ships.'},
+    {id:'tw10',urgency:'HIGH',dot:'#2E8B57',title:'Staffing & break schedule · Legal compliance',context:'Monday follow-up · 16 needed / 4 extra',note:'Current model fails legal break coverage math: 16 needed on line + 4 extras can\'t cover all breaks (2×15min + 30min lunch) in 8hr shift. Two scenarios to model: (1) standardize 20-person crew + reallocate surplus to packaging, vs (2) rolling breaks (full line pauses 15min sequentially — costs ~2hr/16hr shift). Volatility: 40hr week → 120hr week swings.'},
+    {id:'tw11',urgency:'HIGH',dot:'#2E8B57',title:'Maximize facility space · Target 20-30% more storage',context:'Pending Darla green light',note:'Mezzanines being cleaned to receive tote storage. Goal: longer production runs, less changeover-driven downtime. Held pending sanitation green light — mice dropping observation post recent flour delivery being monitored.'},
+    {id:'tw12',urgency:'HIGH',dot:'#2E8B57',title:'Wakefern South Shore initial order in',context:'Mid-to-late June in stores · ~100+ stores',note:'Initial order received Friday: 1 pallet per flavor. Increasing — current size not enough for store count. Once cut into section, sustained reorder pace expected.'},
+    {id:'tw13',urgency:'HIGH',dot:'#2E8B57',title:'Athens → Nairobi travel architecture',context:'Etihad selected · Pay Africa reg by July 10',note:'ATH → NBO via Etihad (~16hrs vs ~30hrs other options). Arrive Nairobi Mon 6:10am local. Opportunity Africa registration fee $3,500 — internal target pay July 10 (deadline Aug 14). NBO → ORD return on hold — may extend 1-2 days for business meetings. ORD → ATH booking deferred to June.'},
+    {id:'tw14',urgency:'HIGH',dot:'#2E8B57',title:'Conrad Athens billing reimbursement',context:'~€600 gap · Hotel reconciling internally',note:'Hotel acknowledged discrepancy on their end with their YPO contract. Reconciling internally; reimbursement expected. €2,336 charged vs €1,752-1,776 expected with 25% YPO group discount.'},
+    {id:'tw15',urgency:'MEDIUM',dot:'#2BBF6C',title:'Advisory Board jackets · Buy direct + local embroidery',context:'Target October · 12-15 jackets',note:'Pivot: skip all-in-one vendors (Patagonia ~$241/unit; Arc\'teryx embroidery upcharge $120+). Buy Atom Hoodie direct from Arc\'teryx (~$300 MSRP) + local Chicago/River Forest embroidery. 4 sizes received so far — follow up with remaining advisors. October delivery target with 2-week embroidery buffer.'},
+    {id:'tw16',urgency:'MEDIUM',dot:'#2BBF6C',title:'Field Notes page · Three Nature Photo · Option 1',context:'Ronald 7-day build · Negotiate $250 down',note:'Option 1 selected. Ronald price $250 — David flagged as high vs ~$1K original site cost. Aubrey negotiating down. Also pushing for admin-enabled "Latest News" card capability so future content updates don\'t need dev support. Push depends on Ronald finishing South Shore.'},
+    {id:'tw17',urgency:'MEDIUM',dot:'#2BBF6C',title:'Departmental dashboards rollout · KPI-driven',context:'Monthly review cadence',note:'Production dashboard (Nick) — planned vs actual baking hours + overtime — preliminary version shown. Darla\'s sanitation dashboard already strong (waste tracking, vendor scorecard). Kevin + Jim next. Goal: cutting KPIs presented department-by-department at monthly meeting.'},
+    {id:'tw18',urgency:'MEDIUM',dot:'#2BBF6C',title:'Board advisor on-site visit · Week of July 21',context:'Operations & efficiencies focus',note:'David coordinating with Matt + Nick to have production model + ops dashboards sharp before visit. Send calendar dates soon to leadership team.'},
+    {id:'tw19',urgency:'MEDIUM',dot:'#2BBF6C',title:'Rhonda lawn services · 3 vendors quote',context:'Project Help My Family',note:'3 vendors identified. Calls pending weekend constraint. Annualized cost breakdown after quotes return. Treatment program scoped (mowing biweekly + True Green for treatments). German still unresponsive on initial property assessment.'},
+    {id:'tw20',urgency:'MEDIUM',dot:'#2BBF6C',title:'RMCF thesis development',context:'Public markets · Nasdaq: RMCF',note:'Disciplined position-building continues. Activist-aligned CEO (Jeffrey Geygan). Margin inflection via dynamic pricing. Cocoa cost tailwind normalizing.'},
   ],
   actionItems: [
-    {id:1,title:'Send Aldi $6M incremental hard numbers to Wintrust',due:'This week',urgency:'CRITICAL',owner:'David',detail:'For 2026+2027 combined incremental sales. Substantiates the financing package. Also send completed Quality of Earnings (QofE) report and confirm/forward any additional FY23/FY22 historicals from due diligence.'},
-    {id:2,title:'Kit Shah minority separation',due:'~45 days',urgency:'CRITICAL',owner:'David',detail:'$270K buyout rolled into new term loan. Removes him as guarantor. Closing within ~45 days of May 15.'},
-    {id:3,title:'Push PNC for LOC bump after Wintrust term sheet',due:'This week',urgency:'CRITICAL',owner:'David',detail:'Strategy: wait for Wintrust term sheet, then leverage with Jeff Martinez at PNC. Could push existing PNC LOC over to new term loan to reduce term amount. Goal: increase before June 30 renewal.'},
-    {id:4,title:'Stone Ground Crackers · Provide milling process detail + NY sales data',due:'Before June 10',urgency:'CRITICAL',owner:'David / Lee',detail:'NY-specific unit sales for Acme Markets. Milling process to substantiate "stone ground" labeling (distinguishes from Randolph). McGuire Woods sending joint rep letter + document checklist + draft motion to dismiss.'},
-    {id:5,title:'Pay Salesforce ~$2,200 via Amex',due:'Today (May 11)',urgency:'CRITICAL',owner:'Aubrey',detail:'Access suspended. Halting all Axial deal flow upload. Log receipt in Expensify.'},
-    {id:6,title:'Wire $5K to Capital Alliance',due:'May 11',urgency:'HIGH',owner:'David',detail:'First half of $10K. Still waiting on vendor response for split payment confirmation. Wire today regardless. Second $5K June.'},
-    {id:7,title:'Conrad Athens · Reconcile €600 billing discrepancy',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'25% YPO group discount appears not applied. €2,336 charged vs. €1,752-1,776 expected. Reach out via email; David forwarded original booking email.'},
-    {id:8,title:'Book NY Capital Alliance hotel + flights',due:'May 18',urgency:'HIGH',owner:'Aubrey',detail:'Arrive Sunday midday, depart Wed ~4pm (event recommends arrival by ~10am). Block calendar so Keisha knows travel dates. No United miles remaining — last balance used for Vail.'},
-    {id:9,title:'Book July Boston flights (×3 trips)',due:'May 18',urgency:'HIGH',owner:'Aubrey',detail:'July 14-15, July 20 evening – 22 evening, July 28-29. Kendra confirmed July 21 locked for Ben.'},
-    {id:10,title:'Book Vail lodging + flight',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Flight booked at $1,200. Confirm if Vail group discount has expiration — if no, book May 18; if yes, sooner. Use Chase card. Flight via United credits.'},
-    {id:11,title:'Pay Chicago Club $4,307.56',due:'May 25',urgency:'HIGH',owner:'Aubrey',detail:'United card. Confirm latest invoice first to avoid 60-day late status.'},
-    {id:12,title:'Pay CLA $3,799',due:'June 8',urgency:'HIGH',owner:'Aubrey',detail:'Email CLA to confirm payment date.'},
-    {id:13,title:'Validate "no-tumbler" baked-in sweet puff',due:'Next week',urgency:'HIGH',owner:'Nick',detail:'Run during tumbler wash/adjustment windows to preserve throughput. Possible candidate: sorghum flour + sugar/cinnamon (tested at home). Document run parameters and throughput impact.'},
-    {id:14,title:'Cost-down formulation proposal · Flour + oil',due:'Next week',urgency:'HIGH',owner:'Nick',detail:'Alternative flour composition + candidate oil types. Maintain crispness/quality. Kevin to meet with Nick tomorrow for oil pricing + viable alternatives.'},
-    {id:15,title:'Push seasoning vendor on lead-time reduction',due:'Next week',urgency:'HIGH',owner:'David',detail:'Tumbler 20-week quote = mid-October. Explore used equipment, slurry vs. powder. Coordinate with Foodservice (Kevin) to benchmark practices and slurry suitability for cheese coatings.'},
-    {id:16,title:'Claude umbrella · Master prompt + leadership rollout',due:'Approve next week',urgency:'HIGH',owner:'Lander · David',detail:'Lander delivering revised draft before next weekly meeting. Two products: CSU AI Principles + Prompting Instructions. Approve next meeting, present to leadership team after. Individual leaders to initial principles + email receipt.'},
-    {id:17,title:'Sign + return Ameriprise transfer form to Carl',due:'This week',urgency:'HIGH',owner:'David',detail:'OTC Fidelity, Apple, Berkshire, all shares tax-exempt MMF transfer to DAF (Fidelity / US Charitable Gift Trust). Both signatures required. Scan both pages back to Carl via secure portal.'},
-    {id:18,title:'Family insurance · Complete intake forms',due:'When received',urgency:'HIGH',owner:'David / Aubrey',detail:'Carl sending prep documents (CC Aubrey, CSU email). Mom + stepmom: $100K death benefit, $4K combined annual premium budget. Vincent: temp coverage until full-time employment. Carl checking IN insurance licensing.'},
-    {id:19,title:'Salesforce · Upload Gung Ho Corporation for research',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'New research target. Move 1035 to On Hold. Filter Notion board by Assigned to: David Lewis. Donut chart layout applied.'},
-    {id:20,title:'Manually generate weekly dashboard until Cloud Code live',due:'Sundays',urgency:'HIGH',owner:'Aubrey',detail:'David sharing Claude thread with meeting notes. Aubrey to update dashboard manually for now and deliver Sundays for Monday review. Weekly to-do request for materials sent Friday for Sunday turnaround.'},
-    {id:21,title:'Springs Food meeting · Capture protein cracker process changes',due:'May 12',urgency:'HIGH',owner:'Jim',detail:'Customer suggesting processing changes for high-protein cracker. Note refrigerated Puratos component handling requirement. Circulate summary.'},
-    {id:22,title:'Lavo Retail / Walmart · Mock packaging samples',due:'TBD',urgency:'MEDIUM',owner:'Jim · Nick',detail:'Snack cracker samples in mock packaging (white boxes + client logo sticker, not bagged). Walmart decision in 2027 — don\'t hold up Mariner timing. Volume opportunity if it lands.'},
-    {id:23,title:'Albertson\'s · Develop entertaining cracker samples for Nikki',due:'TBD',urgency:'MEDIUM',owner:'Jim · Nick',detail:'Garlic thyme, rosemary, butter-based (Ritz-like). Toppings at end of run.'},
-    {id:24,title:'Z Crackers cornmeal mini sample',due:'This week',urgency:'MEDIUM',owner:'Nick',detail:'~20% cornmeal formula adjustment. Cornmeal received Friday. Easy run on minis.'},
-    {id:25,title:'Source Arc\'teryx Atom Jackets for Advisory Board',due:'Q3 prep',urgency:'MEDIUM',owner:'Aubrey',detail:'Request jacket/vest sizes from all 8 board members. Source pricing — buy + embroider Sisu logo (back collar or alt placement). Open to one-stop vendor if available.'},
-    {id:26,title:'Set up GitHub + outsourced server for Claude Code',due:'TBD',urgency:'MEDIUM',owner:'David',detail:'Unblocks Aubrey to explore Cloud Code. Long-term: dashboard automation via agentic workflow.'},
-    {id:27,title:'Cancel Bridge / lawn service going to stepmom',due:'This week',urgency:'MEDIUM',owner:'Aubrey',detail:'Ensure scope redirects to Rhonda\'s correct address. Stepmom (1309 W 47th) already has someone cutting grass. Confirm Rhonda address (~2041 Gary, IN 46404).'},
-    {id:28,title:'Follow up with German on Rhonda\'s initial assessment',due:'This week',urgency:'MEDIUM',owner:'David · Aubrey',detail:'No response yet. Aubrey texted; David also texted directly.'},
-    {id:29,title:'Build seasonal NPD cadence + customer submission calendar',due:'Q2',urgency:'MEDIUM',owner:'Brandon',detail:'Stage gates, WIP targets (in test, flavors teed up). Some customers only allow 2 NPD windows/year — backward planning to ensure sample/spec readiness at gates.'},
-    {id:30,title:'NPD SOP · Ship unseasoned puffs; vendors do flavor trials',due:'Document this week',urgency:'MEDIUM',owner:'Brandon',detail:'Hard and fast: plant ships unseasoned puffs. Vendors experiment. Only request bulk seasoning (~20 lbs) when near-go on a winning flavor (e.g., Japanese barbecue). Communicate to Jill + all flavor partners.'},
-    {id:31,title:'Long-horizon data sources · 3-5 year market shift visibility',due:'TBD',urgency:'MEDIUM',owner:'Brandon',detail:'Current data (vendor ~1yr outlook, Nielsen real-time) is insufficient. Recommend data stack to track protein, fiber, non-seed-oil, GLP-1 shifts.'},
-    {id:32,title:'Soft-circle co-investor pool',due:'2026',urgency:'MEDIUM',owner:'David',detail:'Family office relationships through Field Notes, annual letter, and direct conversations.'},
-    {id:33,title:'Identify bolt-on targets under Venus',due:'Q2 2026',urgency:'MEDIUM',owner:'David',detail:'Strategic tuck-ins. Diligence on lead target Q3. IC memo and capital decision Q3.'},
-    {id:34,title:'NDAs — outstanding copies collected',due:'Ongoing',urgency:'MEDIUM',owner:'Aubrey',detail:'In progress. Collect all executed NDAs and confirm advisory data room access.'},
+    {id:1,title:'Pay Boston flights + hotel · Vail Hotel · Capital Alliance hotel + flight',due:'Today (May 18)',urgency:'CRITICAL',owner:'Aubrey',detail:'Use Chase for Vail. United credits for Capital Alliance flight. Share all newly booked itineraries to the Lewis base calendar so Keisha can see travel dates. Defer ORD → ATH booking to June.'},
+    {id:2,title:'Review + execute both Formic DocuSign amendments',due:'When sent',urgency:'CRITICAL',owner:'David',detail:'Two amendments — one per system — both converting to bottom support tool. RJ pushing paperwork through this week before exit. 6-week lead from signature. Amanda becomes ongoing POC.'},
+    {id:3,title:'Nick — Review production scheduling model · Write running list of feedback',due:'Wed 10:30am ET',urgency:'CRITICAL',owner:'Nick',detail:'Read in-and-out, document issues, incorrect assumptions, considerations. Copy/paste directly into Claude for next iteration. Specific data examples (e.g., changeover impact one week) welcome. Bring to Wednesday session with Matt + David.'},
+    {id:4,title:'Stone Ground Crackers · Provide NY sales + milling process detail',due:'Before June 10',urgency:'CRITICAL',owner:'David / Lee',detail:'NY-specific unit sales for Acme Markets. Milling process to substantiate "stone ground" labeling (distinguishes from Randolph). McGuire Woods sending joint rep letter + document checklist + draft motion to dismiss.'},
+    {id:5,title:'Pay Opportunity Africa registration · $3,500',due:'July 10',urgency:'CRITICAL',owner:'Aubrey',detail:'Deadline officially Aug 14 but pay July 10 internal target. Request capacity alerts from Bembe/POC so we don\'t lose slot. ATH→NBO via Etihad Sunday departure, arrive Monday 6:10am local.'},
+    {id:6,title:'Kit Shah minority separation closes',due:'~45 days',urgency:'CRITICAL',owner:'David / Greg K.',detail:'$270K buyout rolled into new term loan. Removes him as guarantor.'},
+    {id:7,title:'Push PNC for LOC bump after Wintrust term sheet',due:'This week',urgency:'CRITICAL',owner:'David',detail:'Wait for Wintrust term sheet → leverage with Jeff Martinez at PNC. Could push existing PNC LOC over to new term loan to reduce term amount. Goal: increase before June 30 renewal.'},
+    {id:8,title:'Aubrey — Update Notion dashboard to Week 21 · Sun–Sat framing',due:'Today',urgency:'HIGH',owner:'Aubrey',detail:'Verify checkbox persistence instructions (Edit Mode) are documented. Going forward: Week 22 = May 24-30, Week 23 = May 31-June 6.'},
+    {id:9,title:'Recurring 30-min intake block · Friday or Sunday',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Calendar block on David\'s calendar every Friday or Sunday to collect weekly inputs for the dashboard.'},
+    {id:10,title:'Notify Ronald — Three Nature Photo Option 1 selected',due:'Today',urgency:'HIGH',owner:'Aubrey',detail:'Confirm 7-day build timeline from design handoff.'},
+    {id:11,title:'Negotiate Ronald $250 implementation fee downward',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Confirm final price and scope including admin-enabled "Latest News" capability. David flagged ~$500 total trending high vs ~$1K baseline original site cost.'},
+    {id:12,title:'Configure admin-enabled "Latest News" card flow',due:'This week',urgency:'HIGH',owner:'Aubrey / Ronald',detail:'So content updates don\'t require developer support. Aubrey already has admin panel access.'},
+    {id:13,title:'Source local embroidery vendors · Chicago / River Forest',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Confirm turnaround times + per-unit pricing for Arc\'teryx/Patagonia embroidery. Direct purchase + local embroidery decision made (skip all-in-one vendors).'},
+    {id:14,title:'Collect remaining advisory board jacket sizes',due:'Next week',urgency:'HIGH',owner:'Aubrey',detail:'4 of 12-15 responses received so far. Follow up with non-responders.'},
+    {id:15,title:'Build jacket budget estimate · 12-15 units · October target',due:'This month',urgency:'HIGH',owner:'Aubrey',detail:'Arc\'teryx Atom Hoodie ~$300 MSRP + local embroidery + contingency. Build per-unit and total.'},
+    {id:16,title:'Send hard numbers · $6M Aldi incremental + QofE + remaining historicals to Wintrust',due:'This week',urgency:'HIGH',owner:'David',detail:'For 2026+2027 combined incremental sales. Substantiates the financing package. Also send completed Quality of Earnings report and confirm/forward any additional FY23/FY22 historicals from due diligence.'},
+    {id:17,title:'Manual top-off process for high-stack SKUs (A00010, A00015)',due:'When palletizer installed',urgency:'HIGH',owner:'Nick',detail:'Lightweight product — minimal ergonomic risk. Stack ~95% automated, manually place final row as pallets pull. Brief operators on procedure. Likely permanent until fork-tool ready end-of-year.'},
+    {id:18,title:'Maximize facility space · Target 20-30% more storage',due:'Pending Darla green light',urgency:'HIGH',owner:'Nick',detail:'Review all areas including mezzanines for tote storage off the ground. Held pending sanitation confirmation post recent flour delivery. Longer runs = less changeover-driven downtime.'},
+    {id:19,title:'Communicate buffer + packaging transition plan to Safeway',due:'This week',urgency:'HIGH',owner:'Jim / Kevin',detail:'Build small transitional buffer (+2 pallets/flavor) for truckload consolidation while depleting old packaging. Need signature select / no organic case label approval, ETA for new packaging production. Don\'t ship new packaging until Safeway approves.'},
+    {id:20,title:'Wakefern initial order in · Drive volume increase',due:'Mid-late June in stores',urgency:'HIGH',owner:'Jim',detail:'Initial order 1 pallet/flavor — going to 100+ stores. Push for increase: current order not enough product. Mid-to-late June store availability.'},
+    {id:21,title:'Send Wednesday board advisor visit dates · Week of July 21',due:'Soon',urgency:'HIGH',owner:'David',detail:'Operations + efficiencies focus. Nick + Matt to have refined operations dashboard ready for visit.'},
+    {id:22,title:'Production dashboard refinement · Monthly review prep',due:'Before monthly meeting',urgency:'HIGH',owner:'Matt / Nick',detail:'Iterate on planned vs actual baking hours + overtime dashboard. Schedule afternoon meeting (David + Matt + Nick) to refine. Sketch out Kevin + Jim dashboards next.'},
+    {id:23,title:'Model staffing scenarios in Claude · Constant crew vs Rolling breaks',due:'Monday follow-up',urgency:'HIGH',owner:'David',detail:'Put May 20 meeting summary into Claude → recommendations. Compare: (1) standardize 20-person crew, reallocate to packaging/prep during low-need, vs (2) rolling 15min breaks down the line (~2hr/16hr shift lost). Need to capture break legal compliance into model.'},
+    {id:24,title:'Three lawn service vendors for Rhonda · Call + quote',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Produce annualized cost breakdown after quotes. Treatment program scoped. German still unresponsive on initial property assessment.'},
+    {id:25,title:'Pay Salesforce ~$2,200 via Amex',due:'Done',urgency:'HIGH',owner:'Aubrey',detail:'Access was suspended — paid via Amex. Log receipt in Expensify.'},
+    {id:26,title:'Wire $5K to Capital Alliance',due:'Done',urgency:'HIGH',owner:'David',detail:'First half of $10K. Second $5K June.'},
+    {id:27,title:'Pay Chicago Club $4,307.56',due:'May 25',urgency:'HIGH',owner:'Aubrey',detail:'United card. Confirm latest invoice first to avoid 60-day late status.'},
+    {id:28,title:'Pay CLA $3,799',due:'June 8',urgency:'HIGH',owner:'Aubrey',detail:'Email CLA to confirm payment date.'},
+    {id:29,title:'Book Grappler\'s Retreat flights',due:'June',urgency:'MEDIUM',owner:'Aubrey',detail:'Retreat dates already on calendar (Aug 28 – Sept 2). Lodging paid. ~$600 flight estimate.'},
+    {id:30,title:'Sign + return Ameriprise transfer form to Carl',due:'This week',urgency:'MEDIUM',owner:'David',detail:'OTC Fidelity, Apple, Berkshire, all shares tax-exempt MMF transfer to DAF (Fidelity / US Charitable Gift Trust). Both signatures required. Scan both pages back to Carl via secure portal.'},
+    {id:31,title:'Family insurance · Complete intake forms',due:'When received',urgency:'MEDIUM',owner:'David / Aubrey',detail:'Carl sending prep documents (CC Aubrey, CSU email). Mom + stepmom: $100K death benefit, $4K combined annual premium budget. Vincent: temp coverage until full-time employment. Carl checking IN insurance licensing.'},
+    {id:32,title:'Hold NBO→ORD return booking · Allow 1-2 day extension for business meetings',due:'TBD',urgency:'MEDIUM',owner:'Aubrey',detail:'Reprice options once business meetings in Kenya are scheduled.'},
+    {id:33,title:'Validate Gung Ho Corporation Illinois entity in Salesforce',due:'This week',urgency:'MEDIUM',owner:'Aubrey',detail:'Annotate "limited digital footprint" as a positive qualifier per David. Still under evaluation.'},
+    {id:34,title:'Set up GitHub + outsourced server for Claude Code',due:'TBD',urgency:'MEDIUM',owner:'David',detail:'Unblocks Aubrey to explore Cloud Code. Long-term: dashboard automation via agentic workflow.'},
+    {id:35,title:'Soft-circle co-investor pool',due:'2026',urgency:'MEDIUM',owner:'David',detail:'Family office relationships through Field Notes, annual letter, and direct conversations.'},
+    {id:36,title:'Identify bolt-on targets under Venus',due:'Q2 2026',urgency:'MEDIUM',owner:'David',detail:'Strategic tuck-ins. Diligence on lead target Q3. IC memo and capital decision Q3.'},
+    {id:37,title:'NDAs — outstanding copies collected',due:'Ongoing',urgency:'MEDIUM',owner:'Aubrey',detail:'In progress. Collect all executed NDAs and confirm advisory data room access.'},
   ],
   secondaryDeals: [
     {name:'Westminster Crackers',gate:'SCREEN',note:'Sample exchange completed. No distraction from Venus execution.'},
     {name:"Nature's Intent",gate:'SCREEN',note:''},
     {name:"Matt's Cookies",gate:'SCREEN',note:''},
     {name:'Fantasy Baking',gate:'SCREEN',note:''},
-    {name:'Gung Ho Corporation',gate:'INPROG',note:'NEW · Research in progress. Aubrey compiling info + adding to Salesforce.'},
-    {name:'Deal 1035',gate:'PLANNED',note:'Moved to On Hold this week.'},
+    {name:'Gung Ho Corporation',gate:'INPROG',note:'Illinois entity. Under evaluation. Limited digital footprint — David sees as positive qualifier.'},
   ],
   banking: [
     {name:'Wintrust',contact:'Carlos Cardenas, Group SVP',type:'$2.9M financing package · Active diligence',urgency:'High',urgencyColor:'#B03030',borderColor:'#2E8B57',notes:'May 15 call with Scott + team completed. Internal analysis being updated. Carlos back Monday; reverting next week with timeline, structure, and credit feedback. Package: $2M term refinance + $270K Kit Shah buyout + new $2M LOC. David offering to transfer existing PNC LOC over to reduce term amount. Outstanding requests: hard numbers on $6M Aldi incremental (2026+2027), QofE report, additional FY23/FY22 historicals. ccardenas@wintrust.com · 312-447-7353'},
@@ -505,11 +510,13 @@ const INIT = {
   ],
   advisoryActions: [
     {item:'Kit Shah minority separation closes (~45 days)',owner:'David / Greg K.',due:'Late June'},
-    {item:'Wintrust $2.9M financing package · awaiting term sheet',owner:'David',due:'Next week'},
+    {item:'Wintrust $2.9M financing package · awaiting term sheet',owner:'David',due:'This week'},
+    {item:'Board advisor on-site visit · Operations + efficiencies',owner:'David / Matt / Nick',due:'Week of July 21'},
     {item:'Governance cleanup post-separation',owner:'David / Greg K.',due:'Q2'},
     {item:'COO / Plant Manager search continues',owner:'David / Lander',due:'Q2'},
     {item:'AI tooling · Claude umbrella approval + leadership rollout',owner:'David / Lander',due:'Next 2 weeks'},
-    {item:'Source Arc\'teryx Atom Jackets (monogrammed Sisu) — request sizes from all 8 members',owner:'Aubrey',due:'Q3 prep'},
+    {item:'Arc\'teryx Atom Hoodies (12-15) · buy direct + Chicago/River Forest embroidery',owner:'Aubrey',due:'October delivery'},
+    {item:'Collect remaining advisory board jacket sizes (4 of 12-15 received)',owner:'Aubrey',due:'Next week'},
     {item:'Share dashboard with board prior to Q3 quarterly review',owner:'David / Aubrey',due:'Pre Q3 meeting'},
     {item:'Identify strategic bolt-on targets under Venus',owner:'David',due:'Q2'},
     {item:'RMCF position-building and thesis development',owner:'David',due:'Ongoing'},
@@ -638,7 +645,6 @@ function renderActionItems() {
       <div style="padding:12px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px;background:${isOpen?'#ECEAE8':'#fff'};">
         <div class="flex-center" style="flex:1;">
           <input type="checkbox" ${isDone?'checked':''} onchange="toggleStatus('action-${item.id}')" style="width:15px;height:15px;accent-color:#2BBF6C;flex-shrink:0;" />
-          <div style="width:22px;height:22px;border-radius:50%;background:${isDone?'#C8C7C4':'#191970'};color:#fff;display:flex;align-items:center;justify-content:center;font-size:10px;font-family:monospace;font-weight:700;flex-shrink:0;">${item.id}</div>
           <div>
             <div style="font-size:13px;color:#191970;font-weight:700;text-decoration:${isDone?'line-through':'none'};">${item.title}</div>
             <div style="font-size:11px;color:#777672;font-family:monospace;margin-top:1px;">Owner: ${item.owner} · Due: ${item.due}</div>
@@ -1023,11 +1029,11 @@ function editPrimaryDeal() {
 function archiveWeek() {
   const btn = document.getElementById('archive-btn');
   const archive = S.get('archive') || [];
-  archive.unshift({weekNum:20,dateRange:'May 11 – May 17, 2026',savedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),actionStatuses:data.actionStatuses});
+  archive.unshift({weekNum:21,dateRange:'May 17 – May 23, 2026',savedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),actionStatuses:data.actionStatuses});
   S.set('archive',archive);
   btn.classList.add('saved');
   btn.textContent = '✓ Archived';
-  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='Archive Week 20';},2500);
+  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='Archive Week 21';},2500);
 }
 
 // Load saved edits
