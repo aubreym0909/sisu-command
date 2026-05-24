@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sisu Command · Week 21</title>
+<title>Sisu Command · Week 22</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Georgia',serif;background:#E5E4E2;color:#333333;min-height:100vh;}
@@ -130,13 +130,13 @@ tr:nth-child(even) td{background:#ECEAE8;}
       </div>
       <div class="header-right">
         <div>
-          <div class="week-num">Week 21</div>
-          <div class="week-range">May 17 – May 23, 2026 · Sun–Sat</div>
+          <div class="week-num">Week 22</div>
+          <div class="week-range">May 24 – May 30, 2026 · Sun–Sat</div>
         </div>
         <div class="header-actions">
           <span class="done-count" id="done-count"></span>
           <button class="edit-toggle" id="edit-toggle" onclick="toggleEdit()">Edit Mode</button>
-          <button class="btn-archive" id="archive-btn" onclick="archiveWeek()">Archive Week 21</button>
+          <button class="btn-archive" id="archive-btn" onclick="archiveWeek()">Archive Week 22</button>
         </div>
       </div>
     </div>
@@ -157,7 +157,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
 
 <!-- THIS WEEK -->
 <div id="tab-week">
-  <div class="slabel mb16">Week 21 · May 17 – May 23, 2026 · Sunday – Saturday · Intelligence Layer</div>
+  <div class="slabel mb16">Week 22 · May 24 – May 30, 2026 · Sunday – Saturday · Intelligence Layer</div>
   <div id="week-items" class="col" style="gap:8px;"></div>
   <div id="week-add-form" class="form-box hidden mt16">
     <div class="slabel gray">Add weekly priority</div>
@@ -195,7 +195,22 @@ tr:nth-child(even) td{background:#ECEAE8;}
 <!-- DEAL PIPELINE -->
 <div id="tab-deals" class="hidden">
   <div class="slabel mb16">Primary · Venus Acquisition Holdings</div>
-  <div id="primary-deal" class="mb24"></div>
+  <div id="primary-deal" class="mb16"></div>
+  <!-- Westminster Crackers — separate primary card -->
+  <div class="card mb24" style="border:1px solid #2E8B5744;">
+    <div onclick="this.nextElementSibling.classList.toggle('hidden')" style="cursor:pointer;display:flex;justify-content:space-between;align-items:flex-start;gap:12px;">
+      <div style="flex:1;">
+        <div class="flex-center mb8"><span style="font-size:18px;color:#2E8B57;">★</span><span style="font-size:17px;color:#191970;font-weight:700;">Westminster Crackers</span><span style="margin-left:8px;padding:2px 8px;background:#2E8B5722;border:1px solid #2E8B57;border-radius:3px;font-size:10px;color:#2E8B57;font-weight:700;letter-spacing:.5px;">PRIMARY</span></div>
+        <div style="font-size:11px;color:#777672;font-family:monospace;">Stage: Diligence · Gate: Fast Kill Test pending · Elevated from Secondary — Week 22</div>
+      </div>
+      <span style="font-size:11px;color:#777672;">▼</span>
+    </div>
+    <div class="hidden" style="margin-top:14px;padding-top:14px;border-top:1px solid #C8C7C4;">
+      <div style="font-size:13px;color:#333;line-height:1.6;margin-bottom:10px;">Elevated from secondary to primary this week. Sample exchange with Venus completed — strong strategic fit with existing cracker portfolio. No capital moves without Fast Kill Test completion.</div>
+      <div style="font-size:11px;color:#777672;font-family:monospace;margin-bottom:10px;">Contact: via Venus Brands team · Sample exchange complete</div>
+      <div style="padding:10px 14px;background:#ECEAE8;border:1px solid #C8C7C4;border-radius:3px;font-size:12px;color:#333;"><strong>Next:</strong> Complete Fast Kill Test. Draft 1-page IC memo. Advance SPV structure if Delphi clears.</div>
+    </div>
+  </div>
   <div class="slabel mb16">Secondary · All require Fast Kill Test before any advancement</div>
   <div class="card mb24" style="padding:0;">
     <table><thead><tr><th>Company</th><th>Gate Status</th><th>Note</th><th class="edit-only hidden">Actions</th></tr></thead>
@@ -213,7 +228,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
   <div class="edit-only hidden mb24"><button class="add-btn" onclick="toggleForm('secondary-add-form')">+ Add Secondary Deal</button></div>
 
   <!-- AXIAL DEAL FLOW -->
-  <div class="slabel mb16" style="color:#C8841A;border-bottom-color:rgba(200,132,26,.27);">Axial Deal Flow · Week 21 Snapshot</div>
+  <div class="slabel mb16" style="color:#C8841A;border-bottom-color:rgba(200,132,26,.27);">Axial Deal Flow · Week 22 Snapshot</div>
   <div class="grid-auto mb16">
     <div class="stat-box" style="border-left:4px solid #2E8B57;">
       <div class="stat-label">Advanced to Intro Meeting</div>
@@ -387,7 +402,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
       <div class="footer-rule"><div class="footer-dot"></div>No external narrative without 1-page IC memo.</div>
       <div class="footer-rule"><div class="footer-dot"></div>Passing is success when discipline holds.</div>
     </div>
-    <div class="footer-stamp">SISU INVESTMENT HOLDINGS · WEEK 21 · MAY 17, 2026 · CONFIDENTIAL — DAVID LEWIS ONLY</div>
+    <div class="footer-stamp">SISU INVESTMENT HOLDINGS · WEEK 22 · MAY 24, 2026 · CONFIDENTIAL — DAVID LEWIS ONLY</div>
   </div>
 </div>
 
@@ -431,7 +446,7 @@ const INIT = {
     {id:5,title:'Pay Opportunity Africa registration · $3,500',due:'July 10',urgency:'CRITICAL',owner:'Aubrey',detail:'Deadline officially Aug 14 but pay July 10 internal target. Request capacity alerts from Bembe/POC so we don\'t lose slot. ATH→NBO via Etihad Sunday departure, arrive Monday 6:10am local.'},
     {id:6,title:'Kit Shah minority separation closes',due:'~45 days',urgency:'CRITICAL',owner:'David / Greg K.',detail:'$270K buyout rolled into new term loan. Removes him as guarantor.'},
     {id:7,title:'Push PNC for LOC bump after Wintrust term sheet',due:'This week',urgency:'CRITICAL',owner:'David',detail:'Wait for Wintrust term sheet → leverage with Jeff Martinez at PNC. Could push existing PNC LOC over to new term loan to reduce term amount. Goal: increase before June 30 renewal.'},
-    {id:8,title:'Aubrey — Update Notion dashboard to Week 21 · Sun–Sat framing',due:'Today',urgency:'HIGH',owner:'Aubrey',detail:'Verify checkbox persistence instructions (Edit Mode) are documented. Going forward: Week 22 = May 24-30, Week 23 = May 31-June 6.'},
+    {id:8,title:'Aubrey — Update Notion dashboard to Week 22 · Sun–Sat framing',due:'Today',urgency:'HIGH',owner:'Aubrey',detail:'Verify checkbox persistence instructions (Edit Mode) are documented. Going forward: Week 22 = May 24-30, Week 23 = May 31-June 6.'},
     {id:9,title:'Recurring 30-min intake block · Friday or Sunday',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Calendar block on David\'s calendar every Friday or Sunday to collect weekly inputs for the dashboard.'},
     {id:10,title:'Notify Ronald — Three Nature Photo Option 1 selected',due:'Today',urgency:'HIGH',owner:'Aubrey',detail:'Confirm 7-day build timeline from design handoff.'},
     {id:11,title:'Negotiate Ronald $250 implementation fee downward',due:'This week',urgency:'HIGH',owner:'Aubrey',detail:'Confirm final price and scope including admin-enabled "Latest News" capability. David flagged ~$500 total trending high vs ~$1K baseline original site cost.'},
@@ -460,10 +475,10 @@ const INIT = {
     {id:34,title:'Set up GitHub + outsourced server for Claude Code',due:'TBD',urgency:'MEDIUM',owner:'David',detail:'Unblocks Aubrey to explore Cloud Code. Long-term: dashboard automation via agentic workflow.'},
     {id:35,title:'Soft-circle co-investor pool',due:'2026',urgency:'MEDIUM',owner:'David',detail:'Family office relationships through Field Notes, annual letter, and direct conversations.'},
     {id:36,title:'Identify bolt-on targets under Venus',due:'Q2 2026',urgency:'MEDIUM',owner:'David',detail:'Strategic tuck-ins. Diligence on lead target Q3. IC memo and capital decision Q3.'},
-    {id:37,title:'NDAs — outstanding copies collected',due:'Ongoing',urgency:'MEDIUM',owner:'Aubrey',detail:'In progress. Collect all executed NDAs and confirm advisory data room access.'},
+    {id:38,title:'Source + send baby gift · Brandon & Erica Tammaro',due:'Before June 15',urgency:'MEDIUM',owner:'Aubrey',detail:'Baby due June 15. Source a thoughtful gift for Brandon Tammaro (CCO, Venus Brands) and his wife Erica. Aubrey handling sourcing. Make it personal — something warm and practical for new parents.'},
+    {id:39,title:'NDAs — outstanding copies collected',due:'Ongoing',urgency:'MEDIUM',owner:'Aubrey',detail:'In progress. Collect all executed NDAs and confirm advisory data room access.'},
   ],
   secondaryDeals: [
-    {name:'Westminster Crackers',gate:'SCREEN',note:'Sample exchange completed. No distraction from Venus execution.'},
     {name:"Nature's Intent",gate:'SCREEN',note:''},
     {name:"Matt's Cookies",gate:'SCREEN',note:''},
     {name:'Fantasy Baking',gate:'SCREEN',note:''},
@@ -507,6 +522,7 @@ const INIT = {
     {name:'Lander R. Brown',role:'Human Capital Strategist',value:'Talent architecture, Shared Services structure, M&A integration, culture and DEI strategy.'},
     {name:'Timothy E. Waters',role:'COO, SF Conservation Corps',value:'Staff feedback loops, upskilling plans, culture and performance systems. Harvard MBA.'},
     {name:'Lemuel Seabrook',role:'Retired Banking Exec · BMO Managing Director',value:'Alternative investments, derivatives, municipal finance, risk management. University of Chicago.'},
+    {name:'Ahmad Islam',role:'CMO, Venus Brands · Brand & Marketing',value:'Brand strategy, social media, content, and digital marketing across Venus Brands portfolio. Leads marketing for South Shore, Mariner, Capecchio, and Nejaime\'s.'},
   ],
   advisoryActions: [
     {item:'Kit Shah minority separation closes (~45 days)',owner:'David / Greg K.',due:'Late June'},
@@ -1029,11 +1045,11 @@ function editPrimaryDeal() {
 function archiveWeek() {
   const btn = document.getElementById('archive-btn');
   const archive = S.get('archive') || [];
-  archive.unshift({weekNum:21,dateRange:'May 17 – May 23, 2026',savedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),actionStatuses:data.actionStatuses});
+  archive.unshift({weekNum:22,dateRange:'May 24 – May 30, 2026',savedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),actionStatuses:data.actionStatuses});
   S.set('archive',archive);
   btn.classList.add('saved');
   btn.textContent = '✓ Archived';
-  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='Archive Week 21';},2500);
+  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='Archive Week 22';},2500);
 }
 
 // Load saved edits
