@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sisu Command · Week 24</title>
+<title>Sisu Command · Week 25</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
 body{font-family:'Georgia',serif;background:#E5E4E2;color:#333333;min-height:100vh;}
@@ -106,13 +106,13 @@ tr:nth-child(even) td{background:#ECEAE8;}
       </div>
       <div class="header-right">
         <div>
-          <div class="week-num">Week 24</div>
-          <div class="week-range">June 7 – June 13, 2026 · Sun–Sat</div>
+          <div class="week-num">Week 25</div>
+          <div class="week-range">June 14 – June 20, 2026 · Sun–Sat</div>
         </div>
         <div class="header-actions">
           <span class="done-count" id="done-count"></span>
           <button class="edit-toggle" id="edit-toggle" onclick="toggleEdit()">Edit Mode</button>
-          <button class="btn-archive" id="archive-btn" onclick="archiveWeek()">Archive Week 24</button>
+          <button class="btn-archive" id="archive-btn" onclick="archiveWeek()">Archive Week 25</button>
         </div>
       </div>
     </div>
@@ -132,7 +132,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
 <div class="body">
 <!-- THIS WEEK -->
 <div id="tab-week">
-  <div class="slabel mb16">Week 24 · June 7 – June 13, 2026 · Sunday – Saturday · Intelligence Layer</div>
+  <div class="slabel mb16">Week 25 · June 14 – June 20, 2026 · Sunday – Saturday · Intelligence Layer</div>
   <div id="week-items" class="col" style="gap:8px;"></div>
   <div id="week-add-form" class="form-box hidden mt16">
     <div class="slabel gray">Add weekly priority</div>
@@ -203,7 +203,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
     <div class="flex-center mt8"><button class="save-btn" onclick="addSecondaryDeal()">Add Deal</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('secondary-add-form')">Cancel</button></div>
   </div>
   <div class="edit-only hidden mb24"><button class="add-btn" onclick="toggleForm('secondary-add-form')">+ Add Secondary Deal</button></div>
-  <div class="slabel mb16" style="color:#C8841A;border-bottom-color:rgba(200,132,26,.27);">Axial Deal Flow · Week 24 Snapshot</div>
+  <div class="slabel mb16" style="color:#C8841A;border-bottom-color:rgba(200,132,26,.27);">Axial Deal Flow · Week 25 Snapshot</div>
   <div class="grid-auto mb16">
     <div class="stat-box" style="border-left:4px solid #2E8B57;">
       <div class="stat-label">Intro Meeting</div><div class="stat-value" style="color:#2E8B57;">2</div>
@@ -265,8 +265,8 @@ tr:nth-child(even) td{background:#ECEAE8;}
   </div>
   <div class="edit-only hidden mb20"><button class="add-btn" onclick="toggleForm('banking-add-form')">+ Add Relationship</button></div>
   <div style="padding:14px 18px;background:#191970;border-radius:4px;">
-    <div class="slabel" style="color:#2BBF6C;border-color:rgba(43,191,108,.27);margin-bottom:8px;">Sequencing Rule · Week 24</div>
-    <div style="font-size:13px;color:#fff;line-height:1.6;" id="sequencing-rule">CASH CRISIS: Matt drafting PNC/Jeff $1.5-2M ask within 5-10 business days. SBA loan pursuit to halve monthly debt service — target term sheet by June 30. BMO end-of-month conversation contingent on June trajectory. May loses money; June must break even ($1.2-1.4M/month). 24-hour shifts under consideration to accelerate revenue.</div>
+    <div class="slabel" style="color:#2BBF6C;border-color:rgba(43,191,108,.27);margin-bottom:8px;">Sequencing Rule · Week 25</div>
+    <div style="font-size:13px;color:#fff;line-height:1.6;" id="sequencing-rule">PRIORITY 1: First Choice (Bragg) — loan guarantee exit by end of Q3, non-negotiable. Bragg reviewing PNC credit line terms this week — answer by June 17. If refinancing fails, Bragg buys debt directly from PNC. David: very high confidence in Q3 refinancing. Two lending partners in active discussions. Subordinated note for 10% buyout proposed (outside bank loan, 2-year payout). Monthly updates: end of June + end of July. | PRIORITY 2: SBA loan to halve monthly debt service — target term sheet by June 30. BMO end-of-month conversation on June trajectory.</div>
     <div class="edit-only hidden mt8"><button class="edit-btn" style="background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.3);color:#fff;" onclick="editSequencingRule()">Edit Rule</button></div>
   </div>
 </div>
@@ -287,7 +287,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
       <div class="edit-only hidden mt8"><button class="edit-btn" onclick="editPortfolioContext()">Edit Context</button></div>
     </div>
   </div>
-  <div class="slabel mb16" style="color:#B03030;border-bottom-color:rgba(176,48,48,.27);">Cash Flow Status · Week 24 · URGENT</div>
+  <div class="slabel mb16" style="color:#B03030;border-bottom-color:rgba(176,48,48,.27);">Cash Flow Status · Week 25 · URGENT</div>
   <div class="grid-auto mb24">
     <div class="stat-box" style="border-left:4px solid #B03030;">
       <div class="stat-label">Line Available</div><div class="stat-value" style="color:#B03030;">~$50K</div>
@@ -306,7 +306,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
       <div class="stat-sub">Monthly revenue required</div>
     </div>
   </div>
-  <div class="slabel mb16" style="color:#2E8B57;border-bottom-color:rgba(46,139,87,.27);">Sales Opportunities · Week 24 Intelligence</div>
+  <div class="slabel mb16" style="color:#2E8B57;border-bottom-color:rgba(46,139,87,.27);">Sales Opportunities · Week 25 Intelligence</div>
   <div class="card mb24" style="padding:0;overflow:auto;">
     <table>
       <thead><tr><th>Account</th><th>Status</th><th>Intelligence</th></tr></thead>
@@ -411,7 +411,7 @@ tr:nth-child(even) td{background:#ECEAE8;}
     <div class="flex-center mt8"><button class="save-btn" onclick="addPlatform()">Add Platform</button><button class="cancel-btn" style="margin-left:8px;" onclick="toggleForm('platform-add-form')">Cancel</button></div>
   </div>
   <div class="edit-only hidden mb24"><button class="add-btn" onclick="toggleForm('platform-add-form')">+ Add Platform</button></div>
-  <div class="slabel mb16" style="color:#2E8B57;border-bottom-color:rgba(46,139,87,.27);">Africa Investment Intelligence · Week 24</div>
+  <div class="slabel mb16" style="color:#2E8B57;border-bottom-color:rgba(46,139,87,.27);">Africa Investment Intelligence · Week 25</div>
   <div class="card mb24" style="padding:14px 16px;">
     <div style="font-size:13px;color:#333;line-height:1.8;">
       <strong style="color:#191970;">David's Dual-Track Africa Strategy:</strong><br>
@@ -446,6 +446,7 @@ let openItems={};
 
 const INIT={
   weekItems:[
+    {id:'tw0',isNew:true,urgency:'CRITICAL',dot:'#B03030',title:'First Choice (Bragg) · Loan guarantee exit · Q3 non-negotiable · Credit line answer by next week',context:'June 10 call · PNC · First Choice',note:'Critical call with Bragg (First Choice — 10% minority holder + loan guarantor) June 10. KEY FACTS: (1) PNC credit line increase requires First Choice sign-off — Bragg reviewing PNC terms this week, answer coming next week. (2) First Choice MUST be off the PNC loan by end of Q3 — non-negotiable. If refinancing can\'t close, Bragg will buy the debt directly from PNC rather than carry it on First Choice\'s books in Q4. (3) David: "very high confidence" in Q3 refinancing — two lending partners in active discussions, net 30/45 receivables already going out. (4) Buyout of 10% stake: SECONDARY priority — Bragg proposed subordinated note paid over ~2 years, completely outside bank loan. David appreciated the flexibility ("pretty gracious"). Bragg: "I literally care about getting off of this loan." (5) Monthly update cadence: David to update Bragg end of June + end of July. (6) Business narrative shared: Aldi water crackers now through Dec 2027 (third/fourth year trial → everyday product), snack crackers as year-round revenue, Formic palletizer live, 2027 = no LOC needed.'},
     {id:'tw1',urgency:'CRITICAL',dot:'#B03030',title:'CASH CRISIS · PNC $1.5-2M ask · SBA loan · 20-day runway',context:'Matt / David · Urgent',note:'Venus overdrew LOC to cover payroll — only ~$50K left on line. $65-70K loan payment hits this Friday. Matt drafting request to Jeff/PNC for $1.5M minimum (prefer $2M) within 5-10 business days. June must break even at $1.2-1.4M/month sales — consider 24-hour shifts. SBA loan to halve monthly debt service — target term sheet by end of June. Marketing payments paused. Ahmed bonus deferred. BMO end-of-month conversation target when June trajectory shows positive. DO NOT let supplier flags go up.'},
     {id:'tw2',urgency:'CRITICAL',dot:'#B03030',title:'Kit Shah buyout · Q3 restructuring · BMO term sheet by June 30',context:'Counsel · BMO · CLA',note:'Kit buyout + debt restructure MUST close simultaneously. Banks require 2 strong quarters → realistic timeline Q3 (~Sept 30). BMO SBA term sheet target by June 30. Valuation: 10% = ~$200-250K. Westminster structured under its own LLC (not Venus Acquisition). DO NOT restructure without simultaneously buying out Kit.'},
     {id:'tw3',urgency:'CRITICAL',dot:'#B03030',title:'Nick · One foot out the door · Recruit head mechanic + plant manager URGENTLY',context:'Lander · Recruiting · This week',note:'Nick accepted an engineering role at another company. Plans to still work Venus business hours while keeping evenings/weekends. Characterized as "one foot out the door, one foot in." Accountability gap exposed. TWO HIRES NEEDED: head mechanic + plant manager — ideally from bakery/snack industry (plant manager may embed product development capability). Hire BEFORE informing team of Nick\'s departure. David to call Nick and instruct him NOT to communicate this to the team before leadership does. Lander already in outreach mode — interview mode by next week.'},
@@ -475,7 +476,10 @@ const INIT={
     {id:'tw27',urgency:'LOW',dot:'#777672',title:'RMCF · Disciplined position-building',context:'Public markets · Nasdaq: RMCF',note:'Activist-aligned CEO Jeffrey Geygan. Margin inflection underway. Cocoa cost tailwind normalizing. Long-duration lens. No urgency.'},
   ],
   actionItems:[
-    {id:1,title:'Matt · Draft PNC/Jeff $2M credit ask (min $1.5M) · Send today',due:'Today / 5-10 days',urgency:'CRITICAL',owner:'Matt (Finance)',detail:'Draft formal request to Jeff/PNC: need minimum $1.5M, prefer $2M, within 5-10 business days. Include 20-day cash bridge (daily) showing payroll, debt service, AP criticals, expected AR by customer. Quantify June break-even math ($1.2-1.4M revenue target). State clearly: without liquidity, loan defaults or supplier flags are imminent. David is accessible even while in Alaska.'},
+    {id:0,title:'Bragg (First Choice) · Give answer on PNC credit line extension · By next week',due:'By June 17',urgency:'CRITICAL',owner:'Bragg / David',detail:'Bragg reviewing PNC terms for credit line increase this week. Scheduling meeting with Jeff + PNC team to review and potentially push back on terms. Answer coming to David by next week. Without First Choice sign-off, PNC will not approve the increase given $1M YTD loss.'},
+    {id:1,title:'David · End-of-June refinancing update to Bragg · Monthly cadence',due:'End of June',urgency:'CRITICAL',owner:'David',detail:'Monthly update cadence agreed: David updates Bragg at end of June and end of July on refinancing progress. Two lending partners in active discussions. Bragg needs full separation (First Choice off the PNC loan) by end of Q3 — non-negotiable. David: "very high confidence" this gets done.'},
+    {id:2,title:'David · Evaluate subordinated note structure for First Choice 10% buyout',due:'TBD',urgency:'HIGH',owner:'David',detail:'Bragg proposed: First Choice accepts a subordinated note (e.g., 2-year payout) outside the bank loan — not lumped into the refinancing. David said "pretty gracious" — appreciates the flexibility. Must structure new refinance as a full package (existing term loan + minority buyout). If subordinated note keeps the bank deal clean, that works. Bragg: "Buying me out over two years — I could give a shit. I literally care about getting off of this loan."'},
+    {id:3,title:'Matt · Draft PNC/Jeff $2M credit ask (min $1.5M) · Send today',due:'Today / 5-10 days',urgency:'CRITICAL',owner:'Matt (Finance)',detail:'Draft formal request to Jeff/PNC: need minimum $1.5M, prefer $2M, within 5-10 business days. Include 20-day cash bridge (daily) showing payroll, debt service, AP criticals, expected AR by customer. Quantify June break-even math ($1.2-1.4M revenue target). State clearly: without liquidity, loan defaults or supplier flags are imminent. David is accessible even while in Alaska.'},
     {id:2,title:'David · Initiate SBA refinance · Target term sheet by June 30',due:'By June 30',urgency:'CRITICAL',owner:'David',detail:'SBA loan to halve monthly debt service. Prioritize optionality over hyper-amortization in short term — reinvest in equipment/marketing/cash building. Shortlist lenders, get requirement list, start documentation timeline. BMO end-of-month conversation aligned with SBA plan.'},
     {id:3,title:'David · Call Nick · Do NOT let him communicate departure to team first',due:'This week',urgency:'CRITICAL',owner:'David',detail:'Nick accepted engineering job elsewhere. Plans to work Venus business hours while keeping evenings/weekends. Instruct Nick: leadership will communicate to the team upon David\'s return — Nick is NOT to define the narrative. Lander also briefed.'},
     {id:4,title:'Lander · Interview mode for head mechanic + plant manager · This week',due:'This week',urgency:'CRITICAL',owner:'Lander',detail:'Two hires needed: head mechanic + plant manager (bakery/snack industry preferred — plant manager may embed product development capability). Ideally hired before informing team of Nick\'s situation. Already in outreach mode. Interview mode by next week.'},
@@ -513,7 +517,7 @@ const INIT={
     {name:'Gung Ho Corporation',gate:'INPROG',note:'Illinois entity. Under evaluation. Limited digital footprint — David sees as positive qualifier.'},
   ],
   banking:[
-    {name:'PNC Bank',contact:'Jeff Martinez',type:'Primary LOC · $1.5-2M ask URGENT',urgency:'High',urgencyColor:'#B03030',borderColor:'#B03030',notes:'CASH CRISIS: Matt drafting $2M ask (min $1.5M) for delivery within 5-10 business days. Current LOC: ~$50K after payroll overdraw. $65-70K loan payment due Friday. June 5 interest payment processed. Goal: secure increase to cover 20-day runway. Next: Jeff to receive formal request from Matt with cash bridge and June trajectory narrative.'},
+    {name:'PNC Bank',contact:'Jeff Martinez',type:'Primary LOC · First Choice guarantee · Q3 refinancing required',urgency:'High',urgencyColor:'#B03030',borderColor:'#B03030',notes:'JUNE 10 UPDATE: Bragg (First Choice) reviewed situation — reviewing PNC credit line increase terms this week, answer to David by June 17. First Choice MUST be off the loan by end of Q3 — non-negotiable. Bragg\'s alternative: buy PNC debt directly rather than carry it on First Choice books in Q4. David: "very high confidence" in Q3 refinancing. Two lending partners in active discussions. Subordinated note structure for 10% buyout proposed (2-year payout outside bank loan). Monthly updates: end of June + end of July.'},
     {name:'Wintrust',contact:'Carlos Cardenas, Group SVP',type:'$2.9M financing package · Kit Shah buyout integration',urgency:'High',urgencyColor:'#B03030',borderColor:'#2E8B57',notes:'$2M term refinance + $270K Kit Shah buyout + $2M LOC package. Requires 2 strong performance quarters post-down quarter. Carlos reviewing. ccardenas@wintrust.com · 312-447-7353'},
     {name:'BMO',contact:'Via Adela Cepeda',type:'SBA Refinance Track + End-of-Month Conversation',urgency:'High',urgencyColor:'#B03030',borderColor:'#3030AF',notes:'Pursuing SBA loan to halve monthly debt service. BMO wants end-of-month conversation contingent on June trajectory. May likely loses money; June must be positive. Preliminary June 30 review to show open orders and ramp as underwriting signals. Target: term sheet by end of June.'},
   ],
@@ -637,16 +641,21 @@ function updateDoneCount(){
 }
 function renderWeekItems(){
   const c=document.getElementById('week-items');
-  const active=data.weekItems.filter(item=>data.actionStatuses[item.id]!=='done');
-  if(active.length===0){c.innerHTML='<div style="padding:20px;text-align:center;color:#777672;font-style:italic;">All items completed — check the Completed tab.</div>';return;}
-  c.innerHTML=active.map((item,i)=>{
+  const allActive=data.weekItems.filter(item=>data.actionStatuses[item.id]!=='done');
+  if(allActive.length===0){c.innerHTML='<div style="padding:20px;text-align:center;color:#777672;font-style:italic;">All items completed — check the Completed tab.</div>';return;}
+
+  const newItems=allActive.filter(item=>item.isNew);
+  const carriedItems=allActive.filter(item=>!item.isNew);
+
+  function renderItem(item){
     const isOpen=openItems['week'+item.id];
-    return `<div style="background:#fff;border:1px solid ${isOpen?item.dot+'66':'#C8C7C4'};border-left:5px solid ${item.dot};border-radius:4px;padding:13px 16px;">
+    const dimmed=!item.isNew;
+    return `<div style="background:${item.isNew?'#fff':'#FAFAF9'};border:1px solid ${isOpen?item.dot+'66':item.isNew?'#C8C7C4':'#DDDCDA'};border-left:5px solid ${dimmed?item.dot+'99':item.dot};border-radius:4px;padding:13px 16px;opacity:${dimmed?.85:1};">
       <div class="flex-between" style="align-items:center;">
         <div class="flex-center" style="flex:1;min-width:0;">
           <input type="checkbox" onchange="toggleStatus('${item.id}')" style="width:15px;height:15px;accent-color:#2BBF6C;flex-shrink:0;"/>
           <div onclick="openItems['week${item.id}']=!openItems['week${item.id}'];renderAll();" style="cursor:pointer;">
-            <div style="font-size:14px;color:#191970;font-weight:700;">${item.title}</div>
+            <div style="font-size:14px;color:${dimmed?'#444':'#191970'};font-weight:700;">${item.title}</div>
             <div style="font-size:11px;color:#777672;font-family:monospace;margin-top:2px;">${item.context}</div>
           </div>
         </div>
@@ -658,7 +667,28 @@ function renderWeekItems(){
       </div>
       ${isOpen?`<div style="margin-top:10px;padding-top:10px;border-top:1px solid #ECEAE8;font-size:13px;color:#333;line-height:1.6;">${item.note}</div>`:''}
     </div>`;
-  }).join('');
+  }
+
+  let html='';
+
+  if(newItems.length>0){
+    html+=`<div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;">
+      <div style="font-size:9px;letter-spacing:.3em;text-transform:uppercase;font-family:monospace;font-weight:700;color:#2BBF6C;white-space:nowrap;">★ New This Week</div>
+      <div style="flex:1;height:2px;background:linear-gradient(to right,rgba(43,191,108,.5),transparent);border-radius:1px;"></div>
+    </div>`;
+    html+=newItems.map(renderItem).join('');
+  }
+
+  if(carriedItems.length>0){
+    html+=`<div style="display:flex;align-items:center;gap:10px;margin:${newItems.length>0?'20px':0} 0 10px;">
+      <div style="flex:1;height:1px;background:#C8C7C4;"></div>
+      <div style="font-size:9px;letter-spacing:.25em;text-transform:uppercase;font-family:monospace;font-weight:700;color:#999;white-space:nowrap;padding:0 4px;">↩ Carried Over · Still Active</div>
+      <div style="flex:1;height:1px;background:#C8C7C4;"></div>
+    </div>`;
+    html+=carriedItems.map(renderItem).join('');
+  }
+
+  c.innerHTML=html;
 }
 function renderActionItems(){
   const c=document.getElementById('action-items');
@@ -1043,10 +1073,10 @@ function editPrimaryDeal(){
 function archiveWeek(){
   const btn=document.getElementById('archive-btn');
   const archive=S.get('archive')||[];
-  archive.unshift({weekNum:24,dateRange:'June 7 – June 13, 2026',savedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),actionStatuses:data.actionStatuses});
+  archive.unshift({weekNum:24,dateRange:'June 14 – June 20, 2026',savedAt:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),actionStatuses:data.actionStatuses});
   S.set('archive',archive);
   btn.classList.add('saved');btn.textContent='✓ Archived';
-  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='Archive Week 24';},2500);
+  setTimeout(()=>{btn.classList.remove('saved');btn.textContent='Archive Week 25';},2500);
 }
 const savedContext=S.get('portfolioContext');
 const savedSeqRule=S.get('sequencingRule');
